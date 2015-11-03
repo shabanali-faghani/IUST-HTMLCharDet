@@ -65,33 +65,41 @@ public class Evaluation {
 		List<LangCrawlThread> crawlThreads = new ArrayList<LangCrawlThread>();
 		for (int i = 0; i < numOfThreads; i++) {
 			LangCrawlThread thread = new LangCrawlThread("crawler" + i, langURLQueue, detectedCharsetStat);
-			thread.setUrlCounter(urlCounter);
-			thread.setHaveCharsetInHttpHeaderCounter(haveCharsetInHttpHeaderCounter);
-			thread.setNotExceptionedCounter(notExceptionedCounter);
+			thread.setUrlCounter(urlCounter)
+					.setHaveCharsetInHttpHeaderCounter(haveCharsetInHttpHeaderCounter)
+					.setNotExceptionedCounter(notExceptionedCounter);
 			crawlThreads.add(thread);
 			thread.start();
 			LOG.info("Thread " + thread.getName() + " got launched!");
 		}
 
-		// shutdown hook doesn't works in eclipse but works in command line  
+		// Shutdown hook doesn't work in eclipse but work in command line
 		Runtime.getRuntime().addShutdownHook(new CrawlStopperHook(crawlThreads));
 
-		while (true) {
-			Thread.sleep(2 * 1000);
-			System.out.println("Number of processed URLs:\t" + urlCounter.get());
-			System.out.println("Number of pages that have valid charset in http header:\t"
-					+ haveCharsetInHttpHeaderCounter.get());
-			System.out.println("Number of not exception:\t" + notExceptionedCounter.get());
-			for (Entry<String, ConcurrentMap<String, Integer>> detector : detectedCharsetStat.entrySet()) {
-				System.out.println(detector.getKey() + ":");
-				for (Entry<String, Integer> stat : detector.getValue().entrySet()) {
-					System.out.println(stat.getKey() + ":\t" + stat.getValue());
-				}
-				System.out.println("--------------------------------------------------");
-			}
-			System.out.println("**************************************************************");
+		do {
+			Thread.sleep(5 * 1000);
+			showCurrentStats();
+		} while (langURLQueue.size() == 0);
+
+		for (LangCrawlThread langCrawlThread : crawlThreads) {
+			langCrawlThread.interrupt();
+			langCrawlThread.join();
 		}
-		
+	}
+
+	private void showCurrentStats() {
+		System.out.println("Number of processed URLs:\t" + urlCounter.get());
+		System.out.println("Number of pages that have valid charset in http header:\t"
+				+ haveCharsetInHttpHeaderCounter.get());
+		System.out.println("Number of not exception:\t" + notExceptionedCounter.get());
+		for (Entry<String, ConcurrentMap<String, Integer>> detector : detectedCharsetStat.entrySet()) {
+			System.out.println(detector.getKey() + ":");
+			for (Entry<String, Integer> stat : detector.getValue().entrySet()) {
+				System.out.println(stat.getKey() + ":\t" + stat.getValue());
+			}
+			System.out.println("--------------------------------------------------");
+		}
+		System.out.println("**************************************************************");
 	}
 
 }

@@ -46,7 +46,7 @@ public class LangCrawlThread extends Thread {
 	public void run() {
 		while (langURLQueue.size() != 0 && !isStop) {
 			try {
-				String url = langURLQueue.take();
+				String url = langURLQueue.take(); // take() is blocking method call, TODO: some changes ...
 				urlCounter.incrementAndGet();
 				url = "http://www." + url;
 				Response response = (Response) Jsoup.connect(url).followRedirects(true).timeout(4 * 60 * 1000)
@@ -72,12 +72,11 @@ public class LangCrawlThread extends Thread {
 					LOG.info("An Abnormal Charset: " + charset + "\tURL:" + url);
 				}
 			} catch (Throwable t) {
+				LOG.error(this.getName() + " Exception Message: " + t.getMessage());
 				if (langURLQueue.size() == 0) {
-					LOG.info(this.getName() + ": I'm going to die! There is no reason (i.e. no url) to continue ...");
+					LOG.info(this.getName() + " is going to die!");
 					return;
 				}
-				LOG.error(this.getName() + " Exception Message: " + t.getMessage());
-				continue;
 			}
 		}
 	}
@@ -96,8 +95,7 @@ public class LangCrawlThread extends Thread {
 		CharsetDetector charsetDetector = new CharsetDetector();
 		charsetDetector.setText(bytes);
 		CharsetMatch charsetMatch = charsetDetector.detect();
-		String charset = charsetMatch.getName();
-		return charset;
+		return charsetMatch.getName();
 	}
 
 	private String mozillaJCharDet(byte[] bytes) {
@@ -120,16 +118,19 @@ public class LangCrawlThread extends Thread {
 		return true;
 	}
 
-	public void setUrlCounter(AtomicInteger urlCounter) {
+	public LangCrawlThread setUrlCounter(AtomicInteger urlCounter) {
 		this.urlCounter = urlCounter;
+		return this;
 	}
 
-	public void setHaveCharsetInHttpHeaderCounter(AtomicInteger haveCharsetInHttpHeaderCounter) {
+	public LangCrawlThread setHaveCharsetInHttpHeaderCounter(AtomicInteger haveCharsetInHttpHeaderCounter) {
 		this.haveCharsetInHttpHeaderCounter = haveCharsetInHttpHeaderCounter;
+		return this;
 	}
 
-	public void setNotExceptionedCounter(AtomicInteger notExceptionedCounter) {
+	public LangCrawlThread setNotExceptionedCounter(AtomicInteger notExceptionedCounter) {
 		this.notExceptionedCounter = notExceptionedCounter;
+		return this;
 	}
 
 }
