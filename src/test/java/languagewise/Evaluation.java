@@ -73,7 +73,7 @@ public class Evaluation {
 			LOG.info("Thread " + thread.getName() + " got launched!");
 		}
 
-		// shutdown hook doesn't works in eclipse but works in command line  
+		// Shutdown hook doesn't works in eclipse but works in command line  
 		Runtime.getRuntime().addShutdownHook(new CrawlStopperHook(crawlThreads));
 
 		while (true) {
