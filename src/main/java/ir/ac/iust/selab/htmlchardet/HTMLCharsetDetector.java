@@ -1,4 +1,4 @@
-package edu.iust.selab.htmlchardet;
+package ir.ac.iust.selab.htmlchardet;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -12,7 +12,6 @@ import org.mozilla.intl.chardet.nsDetector;
 import org.mozilla.intl.chardet.nsICharsetDetectionObserver;
 
 import com.ibm.icu.text.CharsetDetector;
-import com.ibm.icu.text.CharsetMatch;
 
 /**
  * 
@@ -22,46 +21,62 @@ import com.ibm.icu.text.CharsetMatch;
 public class HTMLCharsetDetector {
 
 	private static final Logger LOG = Logger.getLogger(HTMLCharsetDetector.class);
-	private static final int threshold = 10;
 
-	public static String detect(byte[] content, boolean lookInMeta) {
+	private static final int threshold = 40;
 
-		String html = new String(content, Charset.forName("ISO-8859-1"));
-		Document domTree = Jsoup.parse(html);
+	// prevent to instantiate any instance of this class
+	private HTMLCharsetDetector() {
+	}
+
+	/**
+	 * This method use <b>ISO-8859-1 Decoding-Encoding</b> approach for Markup Elimination
+	 * 
+	 * @param rawHtmlByteSequence
+	 * @param lookInMeta
+	 * @return detected charset
+	 */
+	public static String detect(byte[] rawHtmlByteSequence, boolean... lookInMeta) {
+
+		String trueHtmlStructure = new String(rawHtmlByteSequence, Charset.forName(Charsets.ISO_8859_1.getValue()));
+		Document domTree = Jsoup.parse(trueHtmlStructure);
 
 		String charset = null;
-		if (lookInMeta) {
-			charset = lookInMetaTags(domTree);
-			if (charset != null) {
+		if (lookInMeta != null && lookInMeta.length > 0 && lookInMeta[0]) {
+			charset = HTMLCharsetDetector.lookInMetaTags(domTree);
+			if (Charsets.isValid(charset)) {
 				return Charsets.normalize(charset);
 			}
 		}
-		
-		charset = mozillaJCharDet(content);
-		if (charset.equalsIgnoreCase("UTF-8")) {
+
+		charset = HTMLCharsetDetector.mozillaJCharDet(rawHtmlByteSequence);
+		if (charset.equalsIgnoreCase(Charsets.UTF_8.getValue())) {
 			return Charsets.normalize(charset);
 		}
 
 		String visibleText = domTree.text();
-		byte[] byteSequence = null;
+		byte[] visibleTextbyteSequence = null;
 		try {
-			byteSequence = visibleText.getBytes("ISO-8859-1");
+			visibleTextbyteSequence = visibleText.getBytes(Charsets.ISO_8859_1.getValue());
 		} catch (UnsupportedEncodingException e) {
-			// This Exception will never raised, because java supports ISO-8859-1. Anyway, ...
-			LOG.warn("could not convert string to byte array using \"ISO-8859-1\" charset. "
-					+ "Detection process will use raw html document as input.", e);
+			// Due to the special feature of ISO-8859-1, this Exception will never raised. Anyway, ...
+			LOG.warn("Could not extract byte sequence from visible text of the html document using "
+					+ "\"ISO-8859-1\" charset. Detection process will use the raw html byte sequence as input.", e);
 		}
-		if (byteSequence == null || byteSequence.length < threshold) {
-			byteSequence = content;
-		}
+		if (visibleTextbyteSequence == null || visibleTextbyteSequence.length < threshold)
+			visibleTextbyteSequence = rawHtmlByteSequence;
 
-		charset = ibmICU4j(byteSequence);
+		charset = HTMLCharsetDetector.ibmICU4j(visibleTextbyteSequence);
 		return Charsets.normalize(charset);
 	}
 
-	private static String lookInMetaTags(Document document) {
+	/**
+	 * 
+	 * @param domTree
+	 * @return found charset if exists, null otherwise
+	 */
+	private static String lookInMetaTags(Document domTree) {
 		String charset = null;
-		Elements metaElements = document.select("meta");
+		Elements metaElements = domTree.select("meta");
 		for (Element meta : metaElements) {
 			charset = meta.attr("charset");
 			if (Charsets.isValid(charset)) {
@@ -81,40 +96,57 @@ public class HTMLCharsetDetector {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param bytes
+	 * @return detected charset if could to, "nomatch" otherwise
+	 */
 	private static String mozillaJCharDet(byte[] bytes) {
 		int lang = nsDetector.ALL;
 		nsDetector det = new nsDetector(lang);
 		det.Init(new nsICharsetDetectionObserver() {
+			@Override
 			public void Notify(String charset) {
-				// HtmlCharsetDetector.found = true;
 			}
 		});
 		det.DoIt(bytes, bytes.length, false);
 		det.DataEnd();
-		String[] charsets = det.getProbableCharsets();
 		det.Reset();
-		return charsets[0];
-		// return det.getProbableCharsets()[0];
-	}
-
-	private static String ibmICU4j(byte[] bytes) {
-		CharsetDetector charsetDetector = new CharsetDetector();
-		charsetDetector.setText(bytes);
-		CharsetMatch charsetMatch = charsetDetector.detect();
-		String charset = charsetMatch.getName();
-		return charset;
+		return det.getProbableCharsets()[0];
 	}
 
 	/**
-	 * @deprecated
-	 * @param content
-	 * @return
+	 * 
+	 * @param bytes
+	 * @return detected charset
 	 */
-	public static String detect(byte[] content) {
+	private static String ibmICU4j(byte[] bytes) {
+		CharsetDetector charsetDetector = new CharsetDetector();
+		charsetDetector.setText(bytes);
+		return charsetDetector.detect().getName();
+	}
 
-		String charset = mozillaJCharDet(content);
-		if (charset.equalsIgnoreCase("UTF-8")) {
-			return Charsets.normalize(charset);
+	/**
+	 * This method uses <b>Direct</b> approach for Markup Elimination
+	 * 
+	 * @param rawHtmlByteSequence
+	 * 
+	 * @deprecated Due to the frequency of malformed HTML web pages this method is highly error-prone,</br>
+	 *             so I strongly recommend to use the {@link #detect(byte[] rawHtmlByteSequence, boolean lookInMeta)} method instead.</br>
+	 *             Also of note, even for well-formed HTML web pages there is no guarantee that this method does <b>Markup Elimination</b></br>   
+	 *             phase correctly, because there are many odd and special points about HTML documents that where neglected in this method.</br>  
+	 *             </br>
+	 *             Anyway this method would be useful for those who do not want to add additional dependency, </br>
+	 *             i.e. Jsoup, into their project. Hence, any suggestion to complete this method would be welcome :) 
+	 *             
+	 * @return detected charset
+	 */
+	@Deprecated
+	public static String detect(byte[] rawHtmlByteSequence) {
+
+		String charset = HTMLCharsetDetector.mozillaJCharDet(rawHtmlByteSequence);
+		if (charset.equalsIgnoreCase(Charsets.UTF_8.getValue())) {
+			return Charsets.UTF_8.getValue();
 		}
 
 		String bodyStart = "<body";
@@ -124,18 +156,17 @@ public class HTMLCharsetDetector {
 		String styleStart = "<style";
 		String styleEnd = "/style>";
 
-		byte[] tempArr = new byte[content.length * 2];
+		byte[] tempArr = new byte[rawHtmlByteSequence.length * 2];
 		int tempArrIndex = 0;
 
 		int startIndex = 0;
 		int endIndex = 0;
 		// Capture body tag contains
-		startIndex = findPattern(content, bodyStart, 0);
+		startIndex = findPattern(rawHtmlByteSequence, bodyStart, 0);
 		while (startIndex != -1) {
-			endIndex = findPattern(content, bodyEnd, startIndex);
+			endIndex = findPattern(rawHtmlByteSequence, bodyEnd, startIndex);
 			for (int i = startIndex + 6; i < endIndex - 1; i++) {
-				tempArr[tempArrIndex] = content[i];
-				// System.out.println(tempArrIndex);
+				tempArr[tempArrIndex] = rawHtmlByteSequence[i];
 				tempArrIndex++;
 			}
 			startIndex = findPattern(tempArr, bodyStart, 0);
@@ -172,6 +203,13 @@ public class HTMLCharsetDetector {
 		return charset;
 	}
 
+	/**
+	 * 
+	 * @param content
+	 * @param pattern
+	 * @param index
+	 * @return
+	 */
 	private static int findPattern(byte[] content, String pattern, int index) {
 		int patternSize = pattern.length();
 
@@ -198,6 +236,11 @@ public class HTMLCharsetDetector {
 		return -1;
 	}
 
+	/**
+	 * 
+	 * @param html
+	 * @return
+	 */
 	private static byte[] removeTags(byte[] html) {
 		int inside = 0;
 		byte[] tempHtml = new byte[html.length];

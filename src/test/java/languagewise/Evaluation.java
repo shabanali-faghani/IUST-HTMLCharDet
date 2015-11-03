@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,9 +22,9 @@ import org.junit.Test;
  * @author shabanali faghani
  * 
  */
-public class LangCrawler {
+public class Evaluation {
 
-	private static final Logger LOG = Logger.getLogger(LangCrawler.class);
+	private static final Logger LOG = Logger.getLogger(Evaluation.class);
 
 	private ConcurrentMap<String, ConcurrentMap<String, Integer>> detectedCharsetStat = null;
 	private AtomicInteger urlCounter = new AtomicInteger(0);
@@ -32,7 +33,9 @@ public class LangCrawler {
 
 	public static final String ibmICUStat = "Statistics of IBM ICU";
 	public static final String mozillaCharDetStat = "Statistics of Mozilla CharDet";
-	public static final String hybridMechanismStat = "Statistics of Hybrid Mechanism";
+	public static final String iustHTMLCharDetStat = "Statistics of IUST HTMLCharDet";
+
+	final int numOfThreads = 100;
 
 	@BeforeClass
 	public void setUp() throws Exception {
@@ -41,12 +44,11 @@ public class LangCrawler {
 		detectedCharsetStat = new ConcurrentHashMap<String, ConcurrentMap<String, Integer>>();
 		detectedCharsetStat.put(ibmICUStat, new ConcurrentHashMap<String, Integer>());
 		detectedCharsetStat.put(mozillaCharDetStat, new ConcurrentHashMap<String, Integer>());
-		detectedCharsetStat.put(hybridMechanismStat, new ConcurrentHashMap<String, Integer>());
+		detectedCharsetStat.put(iustHTMLCharDetStat, new ConcurrentHashMap<String, Integer>());
 	}
 
 	@Test
 	public void crawl() throws InterruptedException, IOException {
-		final int numOfThreads = 100;
 
 		String specLangFile = "Alexa-Persian-Urls";
 		// String specLangFile = "Alexa-Arabic-Urls";
@@ -71,23 +73,25 @@ public class LangCrawler {
 			LOG.info("Thread " + thread.getName() + " got launched!");
 		}
 
+		// Shutdown hook doesn't works in eclipse but works in command line  
 		Runtime.getRuntime().addShutdownHook(new CrawlStopperHook(crawlThreads));
 
 		while (true) {
 			Thread.sleep(2 * 1000);
 			System.out.println("Number of processed URLs:\t" + urlCounter.get());
-			System.out.println("Number of pages with valid charset in http header:\t"
+			System.out.println("Number of pages that have valid charset in http header:\t"
 					+ haveCharsetInHttpHeaderCounter.get());
 			System.out.println("Number of not exception:\t" + notExceptionedCounter.get());
-			for (String detector : detectedCharsetStat.keySet()) {
-				System.out.println(detector + ":");
-				for (String pair : detectedCharsetStat.get(detector).keySet()) {
-					System.out.println(pair + ":\t" + detectedCharsetStat.get(detector).get(pair));
+			for (Entry<String, ConcurrentMap<String, Integer>> detector : detectedCharsetStat.entrySet()) {
+				System.out.println(detector.getKey() + ":");
+				for (Entry<String, Integer> stat : detector.getValue().entrySet()) {
+					System.out.println(stat.getKey() + ":\t" + stat.getValue());
 				}
 				System.out.println("--------------------------------------------------");
 			}
 			System.out.println("**************************************************************");
 		}
+		
 	}
 
 }

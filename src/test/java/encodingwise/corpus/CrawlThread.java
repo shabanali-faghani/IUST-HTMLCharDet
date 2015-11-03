@@ -1,4 +1,6 @@
-package encodingwise.createcorpus;
+package encodingwise.corpus;
+
+import ir.ac.iust.selab.htmlchardet.Charsets;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -18,8 +20,6 @@ import org.jsoup.helper.HttpConnection.Response;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import edu.iust.selab.htmlchardet.Charsets;
 
 /**
  * 
@@ -70,7 +70,6 @@ public class CrawlThread extends Thread {
 				charsetStat.put("All fetched pages", charsetStat.get("All fetched pages") + 1);
 			} catch (Throwable t) {
 				LOG.debug(this.getName() + " Exception Message: " + t.getMessage());
-				// LOG.debug(this.getName(), t);
 				try {
 					threadSeed = seedQueue.take();
 				} catch (InterruptedException e) {
@@ -91,7 +90,7 @@ public class CrawlThread extends Thread {
 				continue;
 			}
 			if (url.toString().contains("#")) {
-				continue; // Ignore relative URLs
+				continue; // ignore relative URLs
 			}
 			urls.add(url);
 		}

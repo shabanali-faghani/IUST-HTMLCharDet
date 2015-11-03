@@ -1,4 +1,4 @@
-package encodingwise.createcorpus.searchutils;
+package encodingwise.corpus.searchutil;
 
 public class SearchResult {
 

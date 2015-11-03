@@ -1,4 +1,4 @@
-package encodingwise.createcorpus;
+package encodingwise.corpus;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -13,8 +13,8 @@ import org.apache.log4j.PropertyConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import encodingwise.createcorpus.searchutils.Google;
-import encodingwise.createcorpus.searchutils.SearchResult;
+import encodingwise.corpus.searchutil.Google;
+import encodingwise.corpus.searchutil.SearchResult;
 
 
 /**

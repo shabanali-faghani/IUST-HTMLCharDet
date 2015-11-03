@@ -28,7 +28,7 @@ public class CrawlStopperHook extends Thread {
 			try {
 				crawlThread.join();
 			} catch (InterruptedException e) {
-				LOG.error("There is an isuue about joining thread: " + crawlThread.getName());
+				LOG.error("There is an isuue about joining thread: " + crawlThread.getName(), e);
 			}
 		}
 	}

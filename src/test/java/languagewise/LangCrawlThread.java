@@ -1,5 +1,8 @@
 package languagewise;
 
+import ir.ac.iust.selab.htmlchardet.Charsets;
+import ir.ac.iust.selab.htmlchardet.HTMLCharsetDetector;
+
 import java.net.URL;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentMap;
@@ -14,9 +17,6 @@ import org.mozilla.intl.chardet.nsICharsetDetectionObserver;
 
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
-
-import edu.iust.selab.htmlchardet.Charsets;
-import edu.iust.selab.htmlchardet.HTMLCharsetDetector;
 
 /**
  * 
@@ -49,7 +49,8 @@ public class LangCrawlThread extends Thread {
 				String url = langURLQueue.take();
 				urlCounter.incrementAndGet();
 				url = "http://www." + url;
-				Response response = (Response) Jsoup.connect(url).followRedirects(true).timeout(4 * 60 * 1000).execute();
+				Response response = (Response) Jsoup.connect(url).followRedirects(true).timeout(4 * 60 * 1000)
+						.execute();
 				notExceptionedCounter.incrementAndGet();
 				String charset = response.charset();
 				if (Charsets.isValid(charset)) {
@@ -59,18 +60,22 @@ public class LangCrawlThread extends Thread {
 					haveCharsetInHttpHeaderCounter.getAndIncrement();
 
 					detectedCharset = ibmICU4j(htmlByteSequence);
-					updateDetectedCharsetStat(charset, detectedCharset, LangCrawler.ibmICUStat);
+					updateDetectedCharsetStat(charset, detectedCharset, Evaluation.ibmICUStat);
 
 					detectedCharset = mozillaJCharDet(htmlByteSequence);
-					updateDetectedCharsetStat(charset, detectedCharset, LangCrawler.mozillaCharDetStat);
+					updateDetectedCharsetStat(charset, detectedCharset, Evaluation.mozillaCharDetStat);
 
 					detectedCharset = HTMLCharsetDetector.detect(htmlByteSequence, false);
-					updateDetectedCharsetStat(charset, detectedCharset, LangCrawler.hybridMechanismStat);
+					updateDetectedCharsetStat(charset, detectedCharset, Evaluation.iustHTMLCharDetStat);
 
 				} else if (charset != null && !charset.isEmpty()) {
 					LOG.info("An Abnormal Charset: " + charset + "\tURL:" + url);
 				}
 			} catch (Throwable t) {
+				if (langURLQueue.size() == 0) {
+					LOG.info(this.getName() + ": I'm going to die! There is no reason (i.e. no url) to continue ...");
+					return;
+				}
 				LOG.error(this.getName() + " Exception Message: " + t.getMessage());
 				continue;
 			}
@@ -99,9 +104,8 @@ public class LangCrawlThread extends Thread {
 		int lang = nsDetector.ALL;
 		nsDetector det = new nsDetector(lang);
 		det.Init(new nsICharsetDetectionObserver() {
-			// @Override
+			@Override
 			public void Notify(String charset) {
-				// HtmlCharsetDetector.found = true;
 			}
 		});
 		det.DoIt(bytes, bytes.length, false);

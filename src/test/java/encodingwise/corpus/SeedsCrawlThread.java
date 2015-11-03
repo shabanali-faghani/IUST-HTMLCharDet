@@ -1,4 +1,6 @@
-package encodingwise.createcorpus;
+package encodingwise.corpus;
+
+import ir.ac.iust.selab.htmlchardet.Charsets;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -18,8 +20,6 @@ import org.jsoup.helper.HttpConnection.Response;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import edu.iust.selab.htmlchardet.Charsets;
 
 /**
  * 
@@ -56,7 +56,7 @@ public class SeedsCrawlThread extends Thread {
 				}
 				Response response = (Response) Jsoup.connect(threadSeed).followRedirects(true).timeout(120 * 1000).execute();
 				String charset = response.charset();
-//				charset = "EUC-KR";
+				// charset = "EUC-KR";
 				charsetStat.put("All fetched URL", charsetStat.get("All fetched URL") + 1);
 				if (Charsets.isValid(charset)) {
 					charset = Charsets.normalize(charset);
@@ -78,7 +78,7 @@ public class SeedsCrawlThread extends Thread {
 							continue;
 						}
 					}
-					File file = new File("test-data/encoding-wise/" + charset + "/" + stat);
+					File file = new File("test-data/encoding-wise/corpus/" + charset + "/" + stat);
 					FileUtils.writeByteArrayToFile(file, content);
 					fetchedURLs.put(threadSeed, content.length);
 					if (charset.equalsIgnoreCase(SpecialChrset)) {
@@ -90,13 +90,18 @@ public class SeedsCrawlThread extends Thread {
 					threadSeed = tunnel(Jsoup.parse(new URL(threadSeed), 120 * 1000));
 				}
 			} catch (Throwable t) {
-				LOG.debug(this.getName() + " Exception Message: " + t.getMessage());
-				// LOG.debug(this.getName(), t);
-				try {
-					threadSeed = seedQueue.take();
-				} catch (InterruptedException e) {
-					continue;
+				if (seedQueue.size() == 0) {
+					try { // Wait for co-worker threads to provide some seeds ...
+						Thread.sleep(60 * 1000);
+					} catch (InterruptedException e) {
+					}
+					if (seedQueue.size() > 0) {
+						continue;
+					}
+					LOG.info(this.getName() + " will die, it seems that there is no url to continue.");
+					return;
 				}
+				LOG.debug(this.getName() + " Exception Message: " + t.getMessage());
 			}
 		}
 	}
@@ -110,13 +115,13 @@ public class SeedsCrawlThread extends Thread {
 			try {
 				url = new URL(link.attr("abs:href"));
 			} catch (MalformedURLException e) {
-				continue; // Ignor invalid URLs
+				continue; // ignore invalid URLs
 			}
 			if (url.toString().contains("#")) {
-				continue; // Ignore relative URLs
+				continue; // ignore relative URLs
 			}
 			if (!url.toString().contains(".htm")) {
-				continue; // sure to be a valid html page, not pdf, mp3, ...
+				continue; // sure to be url of a valid html page, not pdf, mp3, ...
 			}
 			if (!url.getHost().equalsIgnoreCase(HomePageHost)) {
 				continue; // only special pages should be crawled

@@ -1,9 +1,12 @@
 package encodingwise;
 
+import ir.ac.iust.selab.htmlchardet.HTMLCharsetDetector;
+
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
@@ -14,56 +17,55 @@ import org.mozilla.intl.chardet.nsICharsetDetectionObserver;
 import com.ibm.icu.text.CharsetDetector;
 import com.ibm.icu.text.CharsetMatch;
 
-import edu.iust.selab.htmlchardet.HTMLCharsetDetector;
-
 @SuppressWarnings("unused")
 public class Evaluation {
 
 	@Test
 	public void htmlTest() throws Exception {
-//		 File directory = new File("old_corpus/GBK/");
-//		 File directory = new File("old_corpus/ISO-8859-1/");
-//		 File directory = new File("old_corpus/UTF-8/");
-//		 File directory = new File("old_corpus/Windows-1252/");
-//		 File directory = new File("old_corpus/Windows-1256/");
-		 
-		 
-		 File directory = new File("new_corpus/Shift_JIS/");
-//		 File directory = new File("new_corpus/Big5/");
-//		File directory = new File("new_corpus/EUC-JP/");
-//		File directory = new File("new_corpus/Windows-1251/");
-//		File directory = new File("new_corpus/GB2312/");
-//		File directory = new File("new_corpus/ISO-2022-JP/");
-//		File directory = new File("new_corpus/EUC-KR/");
-//		File directory = new File("new_corpus/Windows-1252/");
-//		File directory = new File("new_corpus/UTF-8/");
+		// String charset = "UTF-8";
+		// String charset = "Windows-1251";
+		// String charset = "GBK";
+		// String charset = "Windows-1256";
+		String charset = "Shift_JIS";
+
+		// String charset = "ISO-8859-1";
+		// String charset = "Windows-1252";
+		// String charset = "Big5";
+		// String charset = "EUC-JP";
+		// String charset = "GB2312";
+		// String charset = "ISO-2022-JP";
+		// String charset = "EUC-KR";
+
+		File directory = new File("test-data/encoding-wise/corpus/" + charset);
 
 		int counter = 0;
 		Map<String, Integer> detectedCharsetStat = new HashMap<String, Integer>();
 		for (File file : directory.listFiles()) {
 			byte[] htmlByteSequence = FileUtils.readFileToByteArray(file);
-			byte[] visibleTextByteSequence = Jsoup.parse(new String(htmlByteSequence, Charset.forName("Shift_JIS")))
-					.text().getBytes(Charset.forName("Shift_JIS"));
-			
-//			 String charset = ibmICU4j(htmlByteSequence);
-//			 String charset = ibmICU4j(visibleTextByteSequence);
-			
-//			String charset = mozillaJCharDet(htmlByteSequence);
-			String charset = mozillaJCharDet(visibleTextByteSequence);
-			
-//			 String charset = HTMLCharsetDetector.detect(htmlByteSequence, false);
-			 
-			if (detectedCharsetStat.containsKey(charset)) {
-				detectedCharsetStat.put(charset, detectedCharsetStat.get(charset) + 1);
+			byte[] visibleTextByteSequence = Jsoup.parse(new String(htmlByteSequence, Charset.forName(charset))).text()
+					.getBytes(Charset.forName(charset));
+
+			// String detectedCharset = this.ibmICU4j(htmlByteSequence);
+			// String detectedCharset = this.ibmICU4j(visibleTextByteSequence);
+
+			// String detectedCharset = this.mozillaJCharDet(htmlByteSequence);
+			String detectedCharset = this.mozillaJCharDet(visibleTextByteSequence);
+
+			// String detectedCharset =
+			// HTMLCharsetDetector.detect(htmlByteSequence, false);
+
+			if (detectedCharsetStat.containsKey(detectedCharset)) {
+				detectedCharsetStat.put(detectedCharset, detectedCharsetStat.get(detectedCharset) + 1);
 			} else {
-				detectedCharsetStat.put(charset, 1);
+				detectedCharsetStat.put(detectedCharset, 1);
 			}
 
 			System.out.println(++counter);
 		}
 
-		for (String detectedCharset : detectedCharsetStat.keySet()) {
-			System.out.println(detectedCharset + ":\t" + detectedCharsetStat.get(detectedCharset));
+		System.out.println("--------------------------------------");
+		for (Entry<String, Integer> entry : detectedCharsetStat.entrySet()) {
+			System.out.println(entry.getKey() + ":\t" + entry.getValue());
 		}
 	}
 
@@ -79,9 +81,8 @@ public class Evaluation {
 		int lang = nsDetector.ALL;
 		nsDetector det = new nsDetector(lang);
 		det.Init(new nsICharsetDetectionObserver() {
-			// @Override
+			@Override
 			public void Notify(String charset) {
-				// HtmlCharsetDetector.found = true;
 			}
 		});
 		det.DoIt(bytes, bytes.length, false);

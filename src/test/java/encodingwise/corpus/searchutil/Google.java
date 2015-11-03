@@ -1,4 +1,4 @@
-package encodingwise.createcorpus.searchutils;
+package encodingwise.corpus.searchutil;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class Google implements SearchEngine {
 		try {
 			resultsPage = Jsoup.connect(queryUrl).timeout(60 * 1000).userAgent("Mozilla").get();
 		} catch (IOException e) {
-			LOG.error("Could not get result from Google.", e);
+			LOG.error("Could not search through Google.", e);
 			return null;
 		}
 		List<SearchResult> googleSearchResults = new ArrayList<SearchResult>();
@@ -49,7 +49,6 @@ public class Google implements SearchEngine {
 		// TODO: something here, a thing like the following code ...
 		int numOfResults = 20;
 		List<SearchResult> results = this.search(query, numOfResults);
-		Random randomGenerator = new Random();
-		return results.get(randomGenerator.nextInt(numOfResults));
+		return results.get(new Random().nextInt(numOfResults));
 	}
 }
