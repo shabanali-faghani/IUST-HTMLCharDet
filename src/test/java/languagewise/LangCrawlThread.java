@@ -46,7 +46,7 @@ public class LangCrawlThread extends Thread {
 	public void run() {
 		while (langURLQueue.size() != 0 && !isStop) {
 			try {
-				String url = langURLQueue.take(); // take() is blocking method call, TODO: some changes ...
+				String url = langURLQueue.take(); // take() is a blocking method call, TODO: some changes ...
 				urlCounter.incrementAndGet();
 				url = "http://www." + url;
 				Response response = (Response) Jsoup.connect(url).followRedirects(true).timeout(4 * 60 * 1000)
