@@ -24,7 +24,7 @@ public class HTMLCharsetDetector {
 
 	private static final int threshold = 40;
 
-	// prevent to instantiate any instance of this class
+	// preventing from instantiation any instance of this class
 	private HTMLCharsetDetector() {
 	}
 
@@ -37,11 +37,12 @@ public class HTMLCharsetDetector {
 	 */
 	public static String detect(byte[] rawHtmlByteSequence, boolean... lookInMeta) {
 
-		String trueHtmlStructure = new String(rawHtmlByteSequence, Charset.forName(Charsets.ISO_8859_1.getValue()));
-		Document domTree = Jsoup.parse(trueHtmlStructure);
+		Document domTree = null;
 
 		String charset = null;
 		if (lookInMeta != null && lookInMeta.length > 0 && lookInMeta[0]) {
+			String trueHtmlStructure = new String(rawHtmlByteSequence, Charset.forName(Charsets.ISO_8859_1.getValue()));
+			domTree = Jsoup.parse(trueHtmlStructure);
 			charset = HTMLCharsetDetector.lookInMetaTags(domTree);
 			if (Charsets.isValid(charset)) {
 				return Charsets.normalize(charset);
@@ -53,6 +54,10 @@ public class HTMLCharsetDetector {
 			return Charsets.normalize(charset);
 		}
 
+		if (domTree == null) {
+			String trueHtmlStructure = new String(rawHtmlByteSequence, Charset.forName(Charsets.ISO_8859_1.getValue())); 
+			domTree = Jsoup.parse(trueHtmlStructure);
+		}
 		String visibleText = domTree.text();
 		byte[] visibleTextbyteSequence = null;
 		try {
