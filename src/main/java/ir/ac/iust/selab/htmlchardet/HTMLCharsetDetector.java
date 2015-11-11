@@ -41,8 +41,7 @@ public class HTMLCharsetDetector {
 
 		String charset = null;
 		if (lookInMeta != null && lookInMeta.length > 0 && lookInMeta[0]) {
-			String trueHtmlStructure = new String(rawHtmlByteSequence, Charset.forName(Charsets.ISO_8859_1.getValue()));
-			domTree = Jsoup.parse(trueHtmlStructure);
+			domTree = HTMLCharsetDetector.createDomTree(rawHtmlByteSequence, "ISO-8859-1");
 			charset = HTMLCharsetDetector.lookInMetaTags(domTree);
 			if (Charsets.isValid(charset)) {
 				return Charsets.normalize(charset);
@@ -50,20 +49,20 @@ public class HTMLCharsetDetector {
 		}
 
 		charset = HTMLCharsetDetector.mozillaJCharDet(rawHtmlByteSequence);
-		if (charset.equalsIgnoreCase(Charsets.UTF_8.getValue())) {
+		if (charset.equalsIgnoreCase("UTF-8")) {
 			return Charsets.normalize(charset);
 		}
 
 		if (domTree == null) {
-			String trueHtmlStructure = new String(rawHtmlByteSequence, Charset.forName(Charsets.ISO_8859_1.getValue())); 
-			domTree = Jsoup.parse(trueHtmlStructure);
+			domTree = HTMLCharsetDetector.createDomTree(rawHtmlByteSequence, "ISO-8859-1");
 		}
 		String visibleText = domTree.text();
 		byte[] visibleTextbyteSequence = null;
 		try {
-			visibleTextbyteSequence = visibleText.getBytes(Charsets.ISO_8859_1.getValue());
+			visibleTextbyteSequence = visibleText.getBytes("ISO-8859-1");
 		} catch (UnsupportedEncodingException e) {
-			// Due to the special feature of ISO-8859-1, this Exception will never raised. Anyway, ...
+			// I think this Exception will never raised, because using
+			// ISO-8859-1 it's OK to decode-encode any byte sequence. Anyway, ...
 			LOG.warn("Could not extract byte sequence from visible text of the html document using "
 					+ "\"ISO-8859-1\" charset. Detection process will use the raw html byte sequence as input.", e);
 		}
@@ -72,6 +71,18 @@ public class HTMLCharsetDetector {
 
 		charset = HTMLCharsetDetector.ibmICU4j(visibleTextbyteSequence);
 		return Charsets.normalize(charset);
+	}
+
+	/**
+	 * just to avoiding from code duplication
+	 * 
+	 * @param rawHtmlByteSequence
+	 * @param charset 
+	 * @return DOM tree
+	 */
+	private static Document createDomTree(byte[] rawHtmlByteSequence, String charset) {
+		String trueHtmlStructure = new String(rawHtmlByteSequence, Charset.forName(charset)); 
+		return Jsoup.parse(trueHtmlStructure);
 	}
 
 	/**
@@ -140,6 +151,7 @@ public class HTMLCharsetDetector {
 	 *             so I strongly recommend to use the {@link #detect(byte[] rawHtmlByteSequence, boolean lookInMeta)} method instead.</br>
 	 *             Also of note, even for well-formed HTML web pages there is no guarantee that this method does <b>Markup Elimination</b></br>   
 	 *             phase correctly, because there are many odd and special points about HTML documents that where neglected in this method.</br>  
+	 *             Furthermore, this method has a lot of duplicate code!</br>
 	 *             </br>
 	 *             Anyway this method would be useful for those who do not want to add additional dependency, </br>
 	 *             i.e. Jsoup, into their project. Hence, any suggestion to complete this method would be welcome :) 
@@ -166,7 +178,7 @@ public class HTMLCharsetDetector {
 
 		int startIndex = 0;
 		int endIndex = 0;
-		// Capture body tag contains
+		// capture body tag contents
 		startIndex = findPattern(rawHtmlByteSequence, bodyStart, 0);
 		while (startIndex != -1) {
 			endIndex = findPattern(rawHtmlByteSequence, bodyEnd, startIndex);
