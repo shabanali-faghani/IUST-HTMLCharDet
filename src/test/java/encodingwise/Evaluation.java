@@ -51,8 +51,7 @@ public class Evaluation {
 			// String detectedCharset = this.mozillaJCharDet(htmlByteSequence);
 			String detectedCharset = this.mozillaJCharDet(visibleTextByteSequence);
 
-			// String detectedCharset =
-			// HTMLCharsetDetector.detect(htmlByteSequence, false);
+            // String detectedCharset = HTMLCharsetDetector.detect(htmlByteSequence, false);
 
 			if (detectedCharsetStat.containsKey(detectedCharset)) {
 				detectedCharsetStat.put(detectedCharset, detectedCharsetStat.get(detectedCharset) + 1);
