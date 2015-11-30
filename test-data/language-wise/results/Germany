@@ -1,0 +1,101 @@
+Number of processed URLs:	35318
+Number of not exceptioned request in header fetching:	32171
+Number of pages with valid charset in http header:	23253
+Number of not exceptioned request in header plus body fetching:	23226
+-----------------------------------
+Statistics of IUST HTMLCharDet:
+UTF-8->ISO-8859-1:	62
+Windows-1256->Windows-1256:	1
+ISO-8859-1->Windows-1252:	629
+US-ASCII->UTF-8:	3
+ISO-8859-9->ISO-8859-9:	1
+UTF-8->KOI8-R:	6
+ISO-8859-1->ISO-8859-1:	1191
+Windows-1252->UTF-8:	5
+UTF-8->Windows-1252:	384
+ISO-8859-2->UTF-8:	1
+Windows-1251->Windows-1251:	3
+UTF-8->UTF-32LE:	2
+UTF-8->ISO-8859-2:	1
+ISO-8859-2->ISO-8859-1:	4
+ISO-8859-1->UTF-8:	263
+Windows-1252->ISO-8859-1:	31
+UTF-8->null:	10
+Windows-1252->Windows-1252:	32
+UTF-8->UTF-8:	20143
+ISO-8859-1->KOI8-R:	1
+ISO-8859-15->UTF-8:	43
+ISO-8859-15->ISO-8859-1:	393
+ISO-8859-1->ISO-8859-2:	2
+ISO-8859-9->null:	1
+ISO-8859-15->Windows-1252:	14
+-----------------------------------
+Statistics of IBM ICU:
+UTF-8->ISO-8859-1:	2153
+ISO-8859-15->windows-1252:	5
+UTF-8->windows-1250:	5
+UTF-8->KOI8-R:	1
+ISO-8859-1->ISO-8859-1:	1883
+Windows-1252->UTF-8:	2
+ISO-8859-15->windows-1250:	1
+Windows-1251->ISO-8859-1:	3
+UTF-8->UTF-32LE:	2
+ISO-8859-9->ISO-8859-1:	2
+UTF-8->ISO-8859-2:	6
+ISO-8859-2->ISO-8859-1:	5
+ISO-8859-1->UTF-8:	39
+Windows-1252->ISO-8859-1:	59
+US-ASCII->ISO-8859-1:	3
+ISO-8859-1->UTF-16LE:	1
+UTF-8->UTF-8:	18225
+ISO-8859-1->KOI8-R:	1
+UTF-8->windows-1253:	5
+ISO-8859-1->Big5:	3
+ISO-8859-15->UTF-8:	8
+ISO-8859-15->ISO-8859-1:	429
+Windows-1252->windows-1252:	7
+Windows-1256->ISO-8859-1:	1
+ISO-8859-15->ISO-8859-2:	7
+ISO-8859-1->windows-1252:	150
+ISO-8859-1->ISO-8859-2:	9
+UTF-8->windows-1252:	210
+-----------------------------------
+Statistics of Mozilla CharDet:
+US-ASCII->UTF-8:	3
+UTF-8->ISO-2022-CN:	1
+ISO-8859-15->windows-1252:	275
+ISO-8859-15->nomatch:	17
+UTF-8->EUC-KR:	2
+Windows-1251->nomatch:	2
+Windows-1252->UTF-8:	5
+UTF-8->UTF-16LE:	46
+ISO-8859-2->UTF-8:	1
+Windows-1252->Big5:	8
+UTF-8->GB18030:	118
+ISO-8859-1->Shift_JIS:	2
+Windows-1252->GB18030:	11
+ISO-8859-2->windows-1252:	3
+ISO-8859-9->windows-1252:	2
+UTF-8->Big5:	97
+ISO-8859-1->UTF-8:	264
+UTF-8->nomatch:	31
+UTF-8->EUC-JP:	6
+ISO-8859-2->Big5:	1
+ISO-8859-1->nomatch:	56
+UTF-8->GB2312:	4
+ISO-8859-1->GB18030:	113
+ISO-8859-1->UTF-16LE:	2
+UTF-8->UTF-8:	20106
+Windows-1252->nomatch:	13
+ISO-8859-15->UTF-8:	43
+ISO-8859-1->Big5:	494
+Windows-1252->windows-1252:	31
+UTF-8->UTF-16BE:	1
+ISO-8859-1->windows-1252:	1155
+ISO-8859-15->Big5:	107
+Windows-1251->UTF-16LE:	1
+UTF-8->windows-1252:	157
+ISO-8859-15->GB18030:	8
+UTF-8->Shift_JIS:	39
+Windows-1256->UTF-16BE:	1
+-----------------------------------

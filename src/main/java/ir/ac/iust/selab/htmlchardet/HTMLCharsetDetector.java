@@ -99,7 +99,7 @@ public class HTMLCharsetDetector {
 				return charset;
 			} else {
 				String contentAttr = meta.attr("content");
-				if (contentAttr.indexOf("charset") != -1) {
+				if (contentAttr.contains("charset")) {
 					int charsetStart = contentAttr.indexOf("charset=") + 8;
 					int charsetEnd = contentAttr.length();
 					charset = contentAttr.substring(charsetStart, charsetEnd).trim();

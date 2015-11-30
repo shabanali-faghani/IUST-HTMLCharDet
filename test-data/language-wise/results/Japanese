@@ -1,0 +1,82 @@
+Number of processed URLs:	20339
+Number of not exceptioned request in header fetching:	16914
+Number of pages with valid charset in http header:	6838
+Number of not exceptioned request in header plus body fetching:	6833
+-----------------------------------
+Statistics of IUST HTMLCharDet:
+UTF-8->ISO-8859-1:	1
+EUC-JP->ISO-8859-1:	2
+EUC-KR->UTF-8:	1
+ISO-8859-1->Windows-1252:	1
+Shift_JIS->ISO-8859-2:	2
+US-ASCII->UTF-8:	1
+UTF-8->KOI8-R:	1
+ISO-8859-1->ISO-8859-1:	1
+UTF-8->Windows-1252:	8
+UTF-8->UTF-16LE:	1
+Shift_JIS->Windows-1252:	7
+Shift_JIS->UTF-8:	27
+Windows-1251->UTF-8:	1
+EUC-JP->UTF-8:	10
+ISO-8859-1->UTF-8:	17
+EUC-JP->KOI8-R:	2
+EUC-JP->Big5:	1
+UTF-8->null:	2
+UTF-8->UTF-8:	5986
+Shift_JIS->Shift_JIS:	428
+Shift_JIS->null:	6
+ISO-2022-JP->ISO-2022-JP:	4
+EUC-JP->EUC-JP:	322
+UTF-8->Shift_JIS:	1
+-----------------------------------
+Statistics of IBM ICU:
+EUC-JP->ISO-8859-1:	8
+UTF-8->ISO-8859-1:	262
+US-ASCII->UTF-8:	1
+Shift_JIS->ISO-8859-1:	20
+UTF-8->windows-1250:	1
+EUC-KR->ISO-8859-1:	1
+ISO-8859-1->ISO-8859-1:	18
+Shift_JIS->UTF-8:	7
+UTF-8->GB18030:	3
+Shift_JIS->windows-1252:	6
+Windows-1251->UTF-8:	1
+UTF-8->ISO-8859-2:	5
+EUC-JP->UTF-8:	3
+UTF-8->UTF-8:	5677
+Shift_JIS->Shift_JIS:	436
+ISO-8859-1->windows-1252:	1
+ISO-2022-JP->ISO-2022-JP:	4
+UTF-8->ISO-8859-9:	1
+EUC-JP->EUC-JP:	326
+UTF-8->windows-1252:	9
+Shift_JIS->KOI8-R:	1
+UTF-8->Shift_JIS:	42
+-----------------------------------
+Statistics of Mozilla CharDet:
+US-ASCII->UTF-8:	1
+EUC-KR->UTF-8:	1
+Shift_JIS->GB18030:	384
+Shift_JIS->nomatch:	3
+EUC-JP->GB2312:	157
+EUC-JP->GB18030:	102
+UTF-8->UTF-16LE:	9
+Shift_JIS->UTF-8:	27
+UTF-8->GB18030:	4
+Shift_JIS->windows-1252:	2
+Windows-1251->UTF-8:	1
+EUC-JP->nomatch:	3
+EUC-JP->UTF-8:	10
+ISO-8859-1->UTF-8:	17
+Shift_JIS->UTF-16LE:	4
+EUC-JP->Big5:	51
+ISO-8859-1->GB18030:	1
+UTF-8->UTF-8:	5985
+Shift_JIS->Shift_JIS:	50
+ISO-8859-1->windows-1252:	1
+ISO-2022-JP->ISO-2022-JP:	4
+EUC-JP->windows-1252:	2
+EUC-JP->EUC-JP:	12
+UTF-8->windows-1252:	1
+UTF-8->Shift_JIS:	1
+-----------------------------------

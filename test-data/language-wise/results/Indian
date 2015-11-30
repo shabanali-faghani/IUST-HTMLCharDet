@@ -1,0 +1,77 @@
+Number of processed URLs:	12236
+Number of not exceptioned request in header fetching:	8136
+Number of pages with valid charset in http header:	4879
+Number of not exceptioned request in header plus body fetching:	4867
+-----------------------------------
+Statistics of IUST HTMLCharDet:
+ISO-8859-1->Windows-1252:	7
+UTF-8->ISO-8859-1:	28
+ISO-8859-9->ISO-8859-9:	1
+UTF-8->KOI8-R:	1
+ISO-8859-1->ISO-8859-1:	18
+UTF-8->Windows-1252:	27
+UTF-8->UTF-16LE:	1
+Windows-1251->Windows-1251:	10
+ISO-8859-9->UTF-8:	1
+Windows-1251->UTF-8:	1
+ISO-8859-1->UTF-8:	118
+UTF-8->null:	1
+Windows-1252->Windows-1252:	2
+UTF-8->UTF-8:	4644
+Shift_JIS->Shift_JIS:	1
+ISO-8859-15->UTF-8:	1
+ISO-8859-15->ISO-8859-1:	2
+UTF-8->UTF-16BE:	1
+GB2312->UTF-8:	1
+EUC-JP->EUC-JP:	1
+-----------------------------------
+Statistics of IBM ICU:
+UTF-8->ISO-8859-1:	1600
+Windows-1251->windows-1252:	1
+UTF-8->windows-1250:	1
+UTF-8->KOI8-R:	2
+Windows-1251->windows-1251:	1
+ISO-8859-1->ISO-8859-1:	132
+Windows-1251->ISO-8859-2:	1
+UTF-8->UTF-16LE:	2
+UTF-8->GB18030:	1
+Windows-1251->ISO-8859-1:	8
+ISO-8859-9->ISO-8859-1:	2
+UTF-8->Big5:	3
+UTF-8->ISO-8859-2:	6
+ISO-8859-1->UTF-8:	5
+GB2312->ISO-8859-1:	1
+UTF-8->UTF-8:	3066
+Shift_JIS->Shift_JIS:	1
+UTF-8->windows-1253:	1
+ISO-8859-15->UTF-8:	1
+ISO-8859-15->ISO-8859-1:	2
+Windows-1252->windows-1252:	2
+ISO-8859-1->windows-1252:	2
+ISO-8859-1->ISO-8859-2:	4
+EUC-JP->EUC-JP:	1
+UTF-8->windows-1252:	20
+UTF-8->Shift_JIS:	1
+-----------------------------------
+Statistics of Mozilla CharDet:
+ISO-8859-15->windows-1252:	2
+Shift_JIS->GB18030:	1
+EUC-JP->GB2312:	1
+Windows-1251->nomatch:	9
+UTF-8->UTF-16LE:	12
+Windows-1251->UTF-16BE:	1
+UTF-8->GB18030:	6
+ISO-8859-9->UTF-8:	1
+ISO-8859-9->windows-1252:	1
+UTF-8->Big5:	1
+Windows-1251->UTF-8:	1
+ISO-8859-1->UTF-8:	118
+UTF-8->GB2312:	2
+UTF-8->UTF-8:	4638
+ISO-8859-15->UTF-8:	1
+Windows-1252->windows-1252:	2
+GB2312->UTF-8:	1
+ISO-8859-1->windows-1252:	25
+UTF-8->windows-1252:	41
+UTF-8->Shift_JIS:	3
+-----------------------------------

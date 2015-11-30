@@ -1,0 +1,44 @@
+Number of processed URLs:	7396
+Number of not exceptioned request in header fetching:	5497
+Number of pages with valid charset in http header:	4035
+Number of not exceptioned request in header plus body fetching:	4018
+-----------------------------------
+Statistics of IUST HTMLCharDet:
+Windows-1256->Windows-1256:	2
+UTF-8->ISO-8859-1:	1
+UTF-8->KOI8-R:	2
+UTF-8->Windows-1252:	3
+UTF-8->UTF-16LE:	1
+UTF-8->Big5:	2
+Windows-1256->ISO-8859-6:	1
+ISO-8859-1->UTF-8:	4
+UTF-8->null:	1
+UTF-8->UTF-8:	4001
+-----------------------------------
+Statistics of IBM ICU:
+UTF-8->ISO-8859-1:	54
+UTF-8->KOI8-R:	1
+ISO-8859-1->ISO-8859-1:	4
+UTF-8->GB18030:	4
+UTF-8->ISO-8859-2:	2
+UTF-8->Big5:	1
+UTF-8->UTF-8:	3892
+UTF-8->windows-1253:	1
+Windows-1256->windows-1252:	1
+UTF-8->UTF-16BE:	1
+Windows-1256->ISO-8859-1:	2
+UTF-8->ISO-8859-9:	1
+UTF-8->windows-1252:	54
+-----------------------------------
+Statistics of Mozilla CharDet:
+UTF-8->UTF-16LE:	7
+Windows-1256->GB18030:	1
+UTF-8->GB18030:	9
+UTF-8->Big5:	1
+ISO-8859-1->UTF-8:	4
+UTF-8->nomatch:	22
+Windows-1256->Shift_JIS:	1
+UTF-8->UTF-8:	3971
+Windows-1256->nomatch:	1
+UTF-8->windows-1252:	1
+-----------------------------------

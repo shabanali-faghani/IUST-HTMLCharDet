@@ -1,0 +1,54 @@
+Number of processed URLs:	1904
+Number of not exceptioned request in header fetching:	1598
+Number of pages with valid charset in http header:	1099
+Number of not exceptioned request in header plus body fetching:	1093
+-----------------------------------
+Statistics of IUST HTMLCharDet:
+ISO-8859-1->Windows-1252:	1
+Windows-1256->Windows-1256:	34
+UTF-8->ISO-8859-1:	3
+UTF-8->KOI8-R:	1
+Windows-1256->Windows-1252:	1
+ISO-8859-6->ISO-8859-6:	1
+ISO-8859-1->ISO-8859-1:	4
+UTF-8->Windows-1252:	8
+ISO-8859-1->UTF-8:	8
+Windows-1252->ISO-8859-1:	1
+UTF-8->null:	1
+Windows-1252->Windows-1252:	1
+UTF-8->UTF-8:	1024
+ISO-8859-15->ISO-8859-1:	1
+Windows-1256->ISO-8859-1:	1
+Windows-1256->UTF-8:	3
+-----------------------------------
+Statistics of IBM ICU:
+UTF-8->ISO-8859-1:	149
+Windows-1256->windows-1256:	1
+ISO-8859-1->ISO-8859-1:	10
+ISO-8859-1->UTF-8:	1
+UTF-8->UTF-8:	875
+ISO-8859-15->ISO-8859-1:	1
+ISO-8859-6->ISO-8859-1:	1
+Windows-1252->windows-1252:	2
+Windows-1256->ISO-8859-1:	38
+ISO-8859-1->windows-1252:	2
+UTF-8->windows-1252:	13
+-----------------------------------
+Statistics of Mozilla CharDet:
+ISO-8859-15->windows-1252:	1
+ISO-8859-6->nomatch:	1
+UTF-8->UTF-16LE:	3
+UTF-8->GB18030:	1
+UTF-8->ISO-2022-KR:	1
+ISO-8859-1->UTF-8:	8
+UTF-8->nomatch:	12
+Windows-1256->Shift_JIS:	25
+UTF-8->UTF-8:	1013
+Windows-1256->nomatch:	7
+Windows-1252->windows-1252:	2
+Windows-1256->windows-1252:	3
+ISO-8859-1->windows-1252:	5
+Windows-1256->UTF-8:	3
+UTF-8->windows-1252:	7
+Windows-1256->UTF-16BE:	1
+-----------------------------------

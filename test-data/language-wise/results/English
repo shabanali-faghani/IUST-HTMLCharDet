@@ -1,0 +1,79 @@
+Number of processed URLs:	21565
+Number of not exceptioned request in header fetching:	18125
+Number of pages with valid charset in http header:	13254
+Number of not exceptioned request in header plus body fetching:	13223
+-----------------------------------
+Statistics of IUST HTMLCharDet:
+ISO-8859-1->Windows-1252:	116
+UTF-8->ISO-8859-1:	89
+US-ASCII->UTF-8:	7
+ISO-8859-2->ISO-8859-2:	3
+UTF-8->KOI8-R:	2
+ISO-8859-1->ISO-8859-1:	178
+Windows-1252->UTF-8:	3
+UTF-8->Windows-1252:	106
+Windows-1251->UTF-8:	1
+Windows-1251->Windows-1252:	1
+ISO-8859-1->UTF-8:	284
+Windows-1252->ISO-8859-1:	9
+UTF-8->null:	6
+Windows-1252->Windows-1252:	1
+UTF-8->UTF-8:	12404
+ISO-8859-15->UTF-8:	4
+ISO-8859-15->ISO-8859-1:	6
+ISO-8859-15->Windows-1252:	3
+-----------------------------------
+Statistics of IBM ICU:
+UTF-8->ISO-8859-1:	3176
+US-ASCII->UTF-8:	3
+Windows-1251->windows-1252:	1
+ISO-8859-15->windows-1252:	1
+UTF-8->windows-1250:	3
+ISO-8859-1->windows-1250:	1
+UTF-8->KOI8-R:	2
+ISO-8859-1->ISO-8859-1:	517
+Windows-1252->UTF-8:	1
+Windows-1251->ISO-8859-1:	1
+ISO-8859-1->Shift_JIS:	1
+UTF-8->ISO-8859-2:	14
+ISO-8859-2->ISO-8859-1:	3
+ISO-8859-1->UTF-8:	25
+Windows-1252->ISO-8859-1:	12
+US-ASCII->ISO-8859-1:	4
+UTF-8->UTF-8:	9378
+ISO-8859-15->ISO-8859-1:	12
+ISO-8859-1->windows-1252:	31
+ISO-8859-1->ISO-8859-2:	3
+UTF-8->windows-1252:	34
+-----------------------------------
+Statistics of Mozilla CharDet:
+US-ASCII->UTF-8:	7
+UTF-8->ISO-2022-CN:	1
+Windows-1251->windows-1252:	1
+ISO-8859-1->UTF-16BE:	1
+ISO-8859-15->windows-1252:	8
+UTF-8->EUC-KR:	1
+Windows-1252->UTF-8:	3
+UTF-8->UTF-16LE:	23
+UTF-8->GB18030:	30
+UTF-8->HZ-GB-2312:	4
+ISO-8859-2->windows-1252:	3
+Windows-1251->UTF-8:	1
+UTF-8->Big5:	9
+UTF-8->ISO-2022-KR:	2
+ISO-8859-1->UTF-8:	282
+UTF-8->nomatch:	8
+ISO-8859-1->nomatch:	2
+UTF-8->GB2312:	6
+ISO-8859-1->GB18030:	5
+ISO-8859-1->UTF-16LE:	1
+UTF-8->UTF-8:	12363
+ISO-8859-15->UTF-8:	5
+ISO-8859-1->Big5:	7
+Windows-1252->windows-1252:	10
+UTF-8->UTF-16BE:	1
+ISO-8859-1->windows-1252:	280
+UTF-8->x-euc-tw:	2
+UTF-8->windows-1252:	147
+UTF-8->Shift_JIS:	10
+-----------------------------------
