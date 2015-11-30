@@ -3,6 +3,9 @@ Number of not exceptioned request in header fetching:	32171
 Number of pages with valid charset in http header:	23253
 Number of not exceptioned request in header plus body fetching:	23226
 -----------------------------------
+-----------------------------------
+Charset in HTTP Header -> Detected Charset
+-----------------------------------
 Statistics of IUST HTMLCharDet:
 UTF-8->ISO-8859-1:	62
 Windows-1256->Windows-1256:	1

@@ -56,7 +56,7 @@ public class Evaluation {
 		// String specLangFile = "Alexa-Japanese-Urls";
 		// String specLangFile = "Alexa-Russian-Urls";
 		// String specLangFile = "Alexa-Chinese-Urls";
-		// String specLangFile = "Alexa-Germany-Urls";
+		// String specLangFile = "Alexa-German-Urls";
 		// String specLangFile = "Alexa-Indian-Urls";
 
 		BlockingQueue<String> langURLQueue = new ArrayBlockingQueue<String>(50000);
