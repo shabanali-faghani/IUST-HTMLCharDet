@@ -16,7 +16,7 @@ Although we wrote a paper to describe the algorithm, but this tool is not just a
 
 In order to determine how IUST HTMLCharDet precise is, we compared it with the two famous charset detector tools namely _**IBM ICU**_ and _**Mozilla CharDet**_ aginst two test scenario, i.e. **Encoding-Wise** and **Language-Wise**. Results of the comparisons are presented in the [paper][paper], but bellow you can have a glance at results. To read more about comparisons, please find the paper inside the *wiki* folder. 
 
-**Note:** In these images *Hybrid* is the same *IUST HTMLCharDet*, because it is actually a hybrid mechanism.
+**Note:** In these images *Hybrid* is the same *IUST HTMLCharDet*, in the paper we called it *Hybrid* because it is actually a hybrid mechanism.
 
 ####Encoding-Wise
 
