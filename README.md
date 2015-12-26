@@ -19,14 +19,14 @@ We compared IUST HTMLCharDet with the two famous charset detector tools namely _
 ####Encoding-Wise
 
 <p align=center>
-<img src="https://cloud.githubusercontent.com/assets/14090324/12004200/d8270428-ab5a-11e5-9017-86e6751f5420.jpg" alt="encoding-wise evaluation image" height="450" width="766">
+<img src="https://cloud.githubusercontent.com/assets/14090324/12007482/e31a7330-ac1b-11e5-976b-2d45beb64939.jpg" alt="encoding-wise evaluation image" height="450" width="766">
 </img>
 </p>
 
 ####Language-Wise
 
 <p align=center>
-<img src="https://cloud.githubusercontent.com/assets/14090324/12004167/c8ab04ce-ab58-11e5-9481-17d9c14d9caf.jpg" alt="language-wise evaluation image" height="305" width="765">
+<img src="https://cloud.githubusercontent.com/assets/14090324/12007456/6d706dfc-ac1a-11e5-8ec3-1d999820f4a4.jpg" alt="language-wise evaluation image" height="305" width="765">
 </img>
 </p>
 ##Installation
