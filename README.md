@@ -19,7 +19,7 @@ In order to determine the precision of IUST HTMLCharDet, we compared it with the
 **Note:** In these images *Hybrid* is the same *IUST HTMLCharDet*, in the paper we called it *Hybrid* because it is actually a hybrid mechanism.
 
 ####Encoding-Wise
-In this test scenario, we compared *IBM ICU*و *Mozilla CharDet* and the *hybrid mechanism* against a corpus of HTML Documents. To create this corpus, we wrote a multi-threaded crawler and then we gathered a collection of nearly 2700 HTML pages with various charset encoding types. The code which we wrote for creating this corpus is available in the [*corpus*][corpus] folder of this repository. Bellow find the comparison result ...
+In this test scenario, we compared *IBM ICU*و *Mozilla CharDet* and the *hybrid mechanism* against a corpus of HTML documents. To create this corpus, we wrote a multi-threaded crawler and then we gathered a collection of nearly 2700 HTML pages with various charset encoding types. The code which we wrote for creating this corpus is available in the [*corpus*][corpus] folder of this repository. Bellow find the comparison results ...
 
 <p align=center>
 <img src="https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/wiki/README-images/encoding-wise-eval.jpg" alt="encoding-wise evaluation image" height="450" width="766">
@@ -33,7 +33,7 @@ Usually graphical presentation of the results makes a better sense ...
 </p>
 
 ####Language-Wise
-In this test scenario, we compared our hybrid mechanism with the two others from language point of view. In this connection, We collected a list of URLs that are pointing to various web pages with different languages. The URLs are selected from the **top one million websites** visited from all over the world, as reported by [*Alexa*][Alexa]. In order to collect HTML documents in a specific language, we investigated web pages with the internet domain name of that language. For example, *Japanese* web pages are collected from *.jp* domain. The results of evaluation for eight different languages are shown in details in following table ...
+In this test scenario, we compared our *hybrid mechanism* with the two others from language point of view. In this connection, we collected a list of URLs that are pointing to various web pages with different languages. The URLs are selected from the **top one million websites** visited from all over the world, as reported by [*Alexa*][Alexa]. In order to collect HTML documents in a specific language, we investigated web pages with the internet domain name of that language. For example, *Japanese* web pages are collected from *.jp* domain. The results of evaluation for eight different languages are shown in details in the following table ...
 
 <p align=center>
 <img src="https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/wiki/README-images/language-wise-eval.jpg" alt="language-wise evaluation image" height="305" width="765">
