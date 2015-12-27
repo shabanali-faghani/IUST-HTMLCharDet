@@ -14,29 +14,35 @@ Although we wrote a paper to describe the algorithm, but this tool is not just a
 
 ##Precision (quick view)
 
-In order to determine the precision of IUST HTMLCharDet, we compared it with the two famous charset detector tools namely _**IBM ICU**_ and _**Mozilla CharDet**_ aginst two test scenario, i.e. **Encoding-Wise** and **Language-Wise**. Results of the comparisons are presented in the [paper][paper], but bellow you can have a glance at results. To read more about comparisons, please find the paper inside the *wiki* folder.
+In order to determine the precision of IUST HTMLCharDet, we compared it with the two famous charset detector tools namely _**IBM ICU**_ and _**Mozilla CharDet**_ aginst two test scenario, i.e. **Encoding-Wise** and **Language-Wise**. Results of the comparisons are presented in the [*paper*][paper], but bellow you can have a glance at results. To read more about comparisons, please find the paper inside the *wiki* folder.
 
 **Note:** In these images *Hybrid* is the same *IUST HTMLCharDet*, in the paper we called it *Hybrid* because it is actually a hybrid mechanism.
 
 ####Encoding-Wise
+In this test scenario, we compared *IBM ICU*و *Mozilla CharDet* and the *hybrid mechanism* against a corpus of HTML Documents. To create this corpus, we wrote a multi-threaded crawler and then we gathered a collection of nearly 2700 HTML pages with various charset encoding types. The code which we wrote for creating this corpus is available in the [*corpus*][corpus] folder of this repository. Bellow find the comparison result ...
 
 <p align=center>
-<img src="https://cloud.githubusercontent.com/assets/14090324/12007482/e31a7330-ac1b-11e5-976b-2d45beb64939.jpg" alt="encoding-wise evaluation image" height="450" width="766">
+<img src="https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/wiki/README-images/encoding-wise-eval.jpg" alt="encoding-wise evaluation image" height="450" width="766">
 </img>
-</br>
+</p>
+Usually graphical presentation of the results makes a better sense ...
 
-<img src="https://cloud.githubusercontent.com/assets/14090324/12007849/cc8f46ca-ac2c-11e5-9600-dd3cd3a39ac1.jpg" alt="encoding-wise evaluation diagram image" height="300" width="645">
+<p align=center>
+<img src="https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/wiki/README-images/encoding-wise-eval-diagram.jpg" alt="encoding-wise evaluation diagram image" height="300" width="645">
 </img>
 </p>
 
 ####Language-Wise
+In this test scenario, we compared our hybrid mechanism with the two others from language point of view. In this connection, We collected a list of URLs that are pointing to various web pages with different languages. The URLs are selected from the **top one million websites** visited from all over the world, as reported by [*Alexa*][Alexa]. In order to collect HTML documents in a specific language, we investigated web pages with the internet domain name of that language. For example, *Japanese* web pages are collected from *.jp* domain. The results of evaluation for eight different languages are shown in details in following table ...
 
 <p align=center>
-<img src="https://cloud.githubusercontent.com/assets/14090324/12007456/6d706dfc-ac1a-11e5-8ec3-1d999820f4a4.jpg" alt="language-wise evaluation image" height="305" width="765">
+<img src="https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/wiki/README-images/language-wise-eval.jpg" alt="language-wise evaluation image" height="305" width="765">
 </img>
-</br>
+</p>
+To find more details about this test, you may want to have a look at: [*./test-data/language-wise/results/*][lang-wise-results]. 
 
-<img src="https://cloud.githubusercontent.com/assets/14090324/12007852/db79aaf4-ac2c-11e5-883a-006de77d3222.jpg" alt="language-wise evaluation diagram image" height="329" width="645">
+<p align=center>
+<img src="https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/wiki/README-images/language-wise-eval-diagram.jpg" alt="language-wise evaluation diagram image" height="319" width="645">
 </img>
 </p>
 ##Installation
@@ -45,3 +51,6 @@ to be continued ...
 
 [1]: http://airs-conference.org/2015/program.html
 [paper]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/wiki/Charset-Encoding-Detection-of-HTML-Documents.pdf
+[corpus]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/src/test/java/encodingwise/corpus
+[Alexa]: www.alexa.com
+[lang-wise-results]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/test-data/language-wise/results
