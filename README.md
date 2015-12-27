@@ -44,4 +44,4 @@ In order to determine the precision of IUST HTMLCharDet, we compared it with the
 to be continued ...
 
 [1]: http://airs-conference.org/2015/program.html
-[paper]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/wiki/Charset Encoding Detection of HTML Documents.pdf
+[paper]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/wiki/Charset-Encoding-Detection-of-HTML-Documents.pdf
