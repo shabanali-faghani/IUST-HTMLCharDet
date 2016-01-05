@@ -5,14 +5,12 @@
 
 	<groupId>ir.ac.iust.selab</groupId>
 	<artifactId>IUST-HTMLCharDet</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>IUST HTML Charset Detector</name>
 	<description> IUST HTMLCharDet is a java tool for detecting
 		charset encoding of HTML web pages in a very accurate way.
-		In fact, our evaluations have shown that this tool is the most
-		powerful java tool for detecting charset encoding of HTML web pages.
 	</description>
 	<url>https://github.com/shabanali-faghani/IUST-HTMLCharDet</url>
 
