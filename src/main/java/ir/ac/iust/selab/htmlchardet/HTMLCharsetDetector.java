@@ -94,7 +94,7 @@ public class HTMLCharsetDetector {
 		String charset = null;
 		Elements metaElements = domTree.select("meta");
 		for (Element meta : metaElements) {
-			charset = meta.attr("charset");
+			charset = meta.attr("charset");  //charset attribute is supported in html5
 			if (Charsets.isValid(charset)) {
 				return charset;
 			} else {

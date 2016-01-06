@@ -47,8 +47,7 @@ public class Google implements SearchEngine {
 
 	public SearchResult imFeelingLucky(String query) {
 		// TODO: something here, a thing like the following code ...
-		int numOfResults = 20;
-		List<SearchResult> results = this.search(query, numOfResults);
-		return results.get(new Random().nextInt(numOfResults));
+		List<SearchResult> results = this.search(query, 20);
+		return results.get(new Random().nextInt(results.size()));
 	}
 }
