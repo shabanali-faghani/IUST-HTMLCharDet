@@ -1,6 +1,6 @@
 #IUST HTMLCharDet
 
-IUST HTMLCharDet is a java tool for detecting *charset encoding* of HTML web pages. **HTMLCharDet** stands for _**HTML** **Char**set **Dete**ctor_ and **IUST** stands for _**I**ran **U**niversity of **S**cience & **T**echnology_.
+IUST HTMLCharDet is a java tool for detecting *charset encoding* of HTML web pages. **HTMLCharDet** stands for _**HTML** **Char**set **Det**ector_ and **IUST** stands for _**I**ran **U**niversity of **S**cience & **T**echnology_.
 
 This tool is in connection with a paper entitled:  
 <p align=center style="font-size:160%;">
@@ -10,7 +10,7 @@ This tool is in connection with a paper entitled:
 
 which was presented in the *[11th Asia Information Retrieval Societies Conference][1]*, in *Brisbane*, *Australia*, *2015*.
 
-Although we wrote a paper to describe the algorithm, but this tool is not just an academic effort to solve *charset encoding detection* problem for HTML web pages. In fact this tool is an **industrial** product which is actively used in a large-scale web crawler,  continuously under a load of over than **1 billion** web pages.
+Although we wrote a paper to describe the algorithm, but this tool is not just an academic effort to solve *charset encoding detection* problem for HTML web pages. In fact this tool is an **industrial** product which is now actively used in a large-scale web crawler, under a load of over than **1 billion** web pages.
 
 ##Precision (quick view)
 
@@ -22,13 +22,13 @@ In order to determine the precision of IUST HTMLCharDet, we compared it with the
 In this test scenario, we compared *IBM ICU*و *Mozilla CharDet* and the *hybrid mechanism* against a corpus of HTML documents. To create this corpus, we wrote a multi-threaded crawler and then we gathered a collection of nearly 2700 HTML pages with various charset encoding types. The code which we wrote for creating this corpus is available in the [*./src/test/java/encodingwise/corpus*][corpus-code] folder of this repository and the created corpus is available via [*./test-data/encoding-wise/corpus.zip*][corpus-data]. Bellow find the comparison results ...
 
 <p align=center>
-<img src="https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/wiki/README-images/encoding-wise-eval.jpg" alt="encoding-wise evaluation image" height="450" width="766">
+<img src="https://cloud.githubusercontent.com/assets/14090324/12007482/e31a7330-ac1b-11e5-976b-2d45beb64939.jpg" alt="encoding-wise evaluation image" height="450" width="766">
 </img>
 </p>
 Usually graphical presentation of the results makes a better sense ...
 
 <p align=center>
-<img src="https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/wiki/README-images/encoding-wise-eval-diagram.jpg" alt="encoding-wise evaluation diagram image" height="300" width="645">
+<img src="https://cloud.githubusercontent.com/assets/14090324/12007849/cc8f46ca-ac2c-11e5-9600-dd3cd3a39ac1.jpg" alt="encoding-wise evaluation diagram image" height="300" width="645">
 </img>
 </p>
 
@@ -36,13 +36,13 @@ Usually graphical presentation of the results makes a better sense ...
 In this test scenario, we compared our *hybrid mechanism* with the two others from language point of view. In this connection, we collected a list of URLs that are pointing to various web pages with different languages. The URLs are selected from the **top 1 million websites** visited from all over the world, as reported by [*Alexa*][Alexa]. In order to collect HTML documents in a specific language, we investigated web pages with the internet domain name of that language. For example, *Japanese* web pages are collected from *.jp* domain. The results of evaluation for eight different languages are shown in details in the following table ...
 
 <p align=center>
-<img src="https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/wiki/README-images/language-wise-eval.jpg" alt="language-wise evaluation image" height="305" width="765">
+<img src="https://cloud.githubusercontent.com/assets/14090324/12007456/6d706dfc-ac1a-11e5-8ec3-1d999820f4a4.jpg" alt="language-wise evaluation image" height="305" width="765">
 </img>
 </p>
 To find more details about this test, you may want to have a look at: [*./test-data/language-wise/results/*][lang-wise-results]. 
 
 <p align=center>
-<img src="https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/wiki/README-images/language-wise-eval-diagram.jpg" alt="language-wise evaluation diagram image" height="319" width="645">
+<img src="https://cloud.githubusercontent.com/assets/14090324/12007852/db79aaf4-ac2c-11e5-883a-006de77d3222.jpg" alt="language-wise evaluation diagram image" height="319" width="645">
 </img>
 </p>
 ##Installation
