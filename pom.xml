@@ -4,7 +4,7 @@
 
 	<groupId>ir.ac.iust.selab</groupId>
 	<artifactId>htmlchardet</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>IUST HTMLCharDet</name>
