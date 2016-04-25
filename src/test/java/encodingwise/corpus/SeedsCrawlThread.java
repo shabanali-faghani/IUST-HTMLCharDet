@@ -1,6 +1,6 @@
 package encodingwise.corpus;
 
-import ir.ac.iust.selab.htmlchardet.Charsets;
+import ir.ac.iust.htmlchardet.Charsets;
 
 import java.io.File;
 import java.net.MalformedURLException;

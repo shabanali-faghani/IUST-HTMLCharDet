@@ -1,4 +1,4 @@
-package ir.ac.iust.selab.htmlchardet;
+package ir.ac.iust.htmlchardet;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -9,11 +9,15 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.mozilla.intl.chardet.nsDetector;
-import org.mozilla.intl.chardet.nsICharsetDetectionObserver;
 
 import com.ibm.icu.text.CharsetDetector;
 
 /**
+ * The logic behind the codes of this class is described in details in a paper entitled: </br>
+ * <p align="center"> <a href="http://link.springer.com/chapter/10.1007/978-3-319-28940-3_17"> Charset
+ * Encoding Detection of HTML Documents</br> A Practical Experience</a>
+ * </p>
+ * which was presented <i> In Proceedings of the 11th Asia Information Retrieval Societies Conference </i>(pp. 215-226). Brisbane, Australia, 2015.
  * 
  * @author <a href="mailto:shabanali.faghani@gmail.com">Shabanali Faghani</a>
  * 
@@ -24,12 +28,12 @@ public class HTMLCharsetDetector {
 
 	private static final int threshold = 40;
 
-	// preventing from instantiation any instance of this class
+	// prevent from instantiating
 	private HTMLCharsetDetector() {
 	}
 
 	/**
-	 * This method use <b>ISO-8859-1 Decoding-Encoding</b> approach for Markup Elimination
+	 * This method uses <b>ISO-8859-1 Decoding-Encoding</b> approach for Markup Elimination.
 	 * 
 	 * @param rawHtmlByteSequence
 	 * @param lookInMeta
@@ -74,7 +78,7 @@ public class HTMLCharsetDetector {
 	}
 
 	/**
-	 * just to avoiding from code duplication
+	 * Just to avoiding from code duplication.
 	 * 
 	 * @param rawHtmlByteSequence
 	 * @param charset 
@@ -86,6 +90,7 @@ public class HTMLCharsetDetector {
 	}
 
 	/**
+	 * Looks for charset inside Meta tag. 
 	 * 
 	 * @param domTree
 	 * @return found charset if exists, null otherwise
@@ -100,9 +105,9 @@ public class HTMLCharsetDetector {
 			} else {
 				String contentAttr = meta.attr("content");
 				if (contentAttr.contains("charset")) {
-					int charsetStart = contentAttr.indexOf("charset=") + 8;
+					int charsetBegin = contentAttr.indexOf("charset=") + 8;
 					int charsetEnd = contentAttr.length();
-					charset = contentAttr.substring(charsetStart, charsetEnd).trim();
+					charset = contentAttr.substring(charsetBegin, charsetEnd).trim();
 					if (Charsets.isValid(charset)) {
 						return charset;
 					}
@@ -113,18 +118,13 @@ public class HTMLCharsetDetector {
 	}
 
 	/**
+	 * Detects charset using Mozilla JCharDet.
 	 * 
 	 * @param bytes
 	 * @return detected charset if could to, "nomatch" otherwise
 	 */
 	private static String mozillaJCharDet(byte[] bytes) {
-		int lang = nsDetector.ALL;
-		nsDetector det = new nsDetector(lang);
-		det.Init(new nsICharsetDetectionObserver() {
-			@Override
-			public void Notify(String charset) {
-			}
-		});
+		nsDetector det = new nsDetector(nsDetector.ALL);
 		det.DoIt(bytes, bytes.length, false);
 		det.DataEnd();
 		det.Reset();
@@ -132,6 +132,7 @@ public class HTMLCharsetDetector {
 	}
 
 	/**
+	 * Detects charset using IBM ICU4J. 
 	 * 
 	 * @param bytes
 	 * @return detected charset
@@ -166,51 +167,51 @@ public class HTMLCharsetDetector {
 			return Charsets.UTF_8.getValue();
 		}
 
-		String bodyStart = "<body";
+		String bodyBegin = "<body";
 		String bodyEnd = "/body>";
-		String scriptStart = "<script";
+		String scriptBegin = "<script";
 		String scriptEnd = "/script>";
-		String styleStart = "<style";
+		String styleBegin = "<style";
 		String styleEnd = "/style>";
 
 		byte[] tempArr = new byte[rawHtmlByteSequence.length * 2];
 		int tempArrIndex = 0;
 
-		int startIndex = 0;
+		int beginIndex = 0;
 		int endIndex = 0;
 		// capture body tag contents
-		startIndex = findPattern(rawHtmlByteSequence, bodyStart, 0);
-		while (startIndex != -1) {
-			endIndex = findPattern(rawHtmlByteSequence, bodyEnd, startIndex);
-			for (int i = startIndex + 6; i < endIndex - 1; i++) {
+		beginIndex = findPattern(rawHtmlByteSequence, bodyBegin, 0);
+		while (beginIndex != -1) {
+			endIndex = findPattern(rawHtmlByteSequence, bodyEnd, beginIndex);
+			for (int i = beginIndex + 6; i < endIndex - 1; i++) {
 				tempArr[tempArrIndex] = rawHtmlByteSequence[i];
 				tempArrIndex++;
 			}
-			startIndex = findPattern(tempArr, bodyStart, 0);
+			beginIndex = findPattern(tempArr, bodyBegin, 0);
 		}
 
 		// delete script tags in body, if exists
-		startIndex = findPattern(tempArr, scriptStart, 0);
-		while (startIndex != -1) {
-			endIndex = findPattern(tempArr, scriptEnd, startIndex);
-			tempArrIndex = startIndex - 1;
+		beginIndex = findPattern(tempArr, scriptBegin, 0);
+		while (beginIndex != -1) {
+			endIndex = findPattern(tempArr, scriptEnd, beginIndex);
+			tempArrIndex = beginIndex - 1;
 			for (int i = endIndex + 8; i < tempArr.length; i++) {
 				tempArr[tempArrIndex] = tempArr[i];
 				tempArrIndex++;
 			}
-			startIndex = findPattern(tempArr, scriptStart, 0);
+			beginIndex = findPattern(tempArr, scriptBegin, 0);
 		}
 
 		// delete style tags in body, if exists
-		startIndex = findPattern(tempArr, styleStart, 0);
-		while (startIndex != -1) {
-			endIndex = findPattern(tempArr, styleEnd, startIndex);
-			tempArrIndex = startIndex - 1;
+		beginIndex = findPattern(tempArr, styleBegin, 0);
+		while (beginIndex != -1) {
+			endIndex = findPattern(tempArr, styleEnd, beginIndex);
+			tempArrIndex = beginIndex - 1;
 			for (int i = endIndex + 8; i < tempArr.length; i++) {
 				tempArr[tempArrIndex] = tempArr[i];
 				tempArrIndex++;
 			}
-			startIndex = findPattern(tempArr, scriptStart, 0);
+			beginIndex = findPattern(tempArr, scriptBegin, 0);
 		}
 
 		// remove other tags without their contents, if exists
@@ -221,11 +222,12 @@ public class HTMLCharsetDetector {
 	}
 
 	/**
+	 * Returns begin index of the given pattern, if exists, -1 otherwise.
 	 * 
 	 * @param content
 	 * @param pattern
 	 * @param index
-	 * @return
+	 * @return begin index of the pattern
 	 */
 	private static int findPattern(byte[] content, String pattern, int index) {
 		int patternSize = pattern.length();
@@ -254,9 +256,10 @@ public class HTMLCharsetDetector {
 	}
 
 	/**
+	 * Removes HTML tags. 
 	 * 
-	 * @param html
-	 * @return
+	 * @param html structure
+	 * @return pure text (without tags) of html
 	 */
 	private static byte[] removeTags(byte[] html) {
 		int inside = 0;

@@ -1,7 +1,7 @@
-package ir.ac.iust.selab.htmlchardet;
+package ir.ac.iust.htmlchardet;
 
 /**
- * To support more charsets you may want to import some special charsets from: </br>
+ * To support more charsets you may import some special charsets from: </br>
  * <a href="http://www.iana.org/assignments/character-sets/character-sets.xhtml">
  * Registered character encodings at IANA</a>
  * 
@@ -60,9 +60,10 @@ public enum Charsets {
 	}
 
 	/**
+	 * Checks validity of the given charset.
 	 * 
 	 * @param charset
-	 * @return
+	 * @return True if is valid, null otherwise
 	 */
 	public static boolean isValid(String charset) {
 		if (charset == null || charset.isEmpty()) {
@@ -77,9 +78,12 @@ public enum Charsets {
 	}
 
 	/**
+	 * In Many cases charsets of the HTML web pages are written very carelessly.
+	 * This method normalize the given charset.    
+	 * 
 	 * @see Charsets#canonicalize(String charset)
 	 * @param charset
-	 * @return normalized form of a given charset
+	 * @return normalized form of the given charset
 	 */
 	public static String normalize(String charset) {
 		for (Charsets normalCharset : Charsets.values()) {
@@ -91,6 +95,8 @@ public enum Charsets {
 	}
 
 	/**
+	 * Some charsets are written in multiple form. This method uniforms these charsets.
+	 * 
 	 * @see Charsets#normalize(String charset)
 	 * @param charset
 	 * @return canonical form of the given charset

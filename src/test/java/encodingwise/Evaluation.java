@@ -1,6 +1,6 @@
 package encodingwise;
 
-import ir.ac.iust.selab.htmlchardet.HTMLCharsetDetector;
+import ir.ac.iust.htmlchardet.HTMLCharsetDetector;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -77,13 +77,7 @@ public class Evaluation {
 	}
 
 	private String mozillaJCharDet(byte[] bytes) {
-		int lang = nsDetector.ALL;
-		nsDetector det = new nsDetector(lang);
-		det.Init(new nsICharsetDetectionObserver() {
-			@Override
-			public void Notify(String charset) {
-			}
-		});
+		nsDetector det = new nsDetector(nsDetector.ALL);
 		det.DoIt(bytes, bytes.length, false);
 		det.DataEnd();
 		String[] charsets = det.getProbableCharsets();
