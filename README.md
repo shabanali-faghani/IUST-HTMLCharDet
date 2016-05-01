@@ -33,7 +33,7 @@ Usually, graphical presentation of the results makes a better sense ...
 </p>
 
 ####Language-Wise Evaluation
-In this test scenario, we compared our *hybrid mechanism* with the two others from language point of view. In this connection, we collected a list of URLs that are pointing to various web pages with different languages. The URLs are selected from the **top 1 million websites** visited from all over the world, as reported by [*Alexa*][Alexa]. In order to collect HTML documents in a specific language, we investigated web pages with the internet domain name of that language. For example, *Japanese* web pages are collected from *.jp* domain. The results of evaluation for eight different languages are shown in details in the following table ...
+In this test scenario, we compared our *hybrid mechanism* with the two others from language point of view. In this connection, we collected a list of URLs that are pointing to various web pages with different languages. The URLs are selected from the **top 1 million websites** visited from all over the world, as reported by [Alexa][Alexa]. In order to collect HTML documents in a specific language, we investigated web pages with the internet domain name of that language. For example, *Japanese* web pages are collected from *.jp* domain. The results of evaluation for eight different languages are shown in details in the following table ...
 
 <p align=center>
 <img src="https://cloud.githubusercontent.com/assets/14090324/12007456/6d706dfc-ac1a-11e5-8ec3-1d999820f4a4.jpg" alt="language-wise evaluation image" height="305" width="765">
@@ -63,7 +63,7 @@ If you use Maven as dependency manager, just place this dependency into your POM
 libraryDependencies += "ir.ac.iust" % "htmlchardet" % "1.0.0"
 ````
 ####Otherwise!
-If you don't use any dependency manager and have a pure java project you can download [htmlchardet-1.0.0.jar][jar] from inside the *wiki* folder. In this case you need the first 4 dependency; those were mentioned in the [pom.xml][pom] file to get it to work for you.
+If you don't use any dependency manager and have a pure java project you can download **htmlchardet-1.0.0.jar** either from inside the [wiki][wiki] folder or from [mvnrepository.org][mvnrepo]. In this case you need the first 4 dependency; those were mentioned in the [pom.xml][pom] file to get it to work for you.
 
 ##Usage
 
@@ -75,7 +75,7 @@ otherwise, call detect method with `false` value for `lookInMeta` argument as fo
 ```java
 String charset = HTMLCharsetDetector.detect(htmlByteArray, false);
 ```
-Also, there is another detection method with `#detect(byte[] rawHtmlByteSequence)` signature, but I don't recommend to use it. To see why, please refer to its [*javadoc*][javadoc].
+Also, there is another detection method with `#detect(byte[] rawHtmlByteSequence)` signature, but I don't recommend to use it. To see why, please refer to its [javadoc][javadoc].
 
 [1]: http://airs-conference.org/2015/program.html
 [paper]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/wiki/Charset-Encoding-Detection-of-HTML-Documents.pdf
@@ -85,5 +85,6 @@ Also, there is another detection method with `#detect(byte[] rawHtmlByteSequence
 [lang-wise-results]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/test-data/language-wise/results
 [w3techs]: http://w3techs.com/technologies/history_overview/character_encoding
 [pom]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/pom.xml
-[jar]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/wiki/htmlchardet-1.0.0.jar
+[mvnrepo]: http://mvnrepository.org/artifact/ir.ac.iust/htmlchardet/1.0.0
+[wiki]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/wiki
 [javadoc]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/src/main/java/ir/ac/iust/selab/htmlchardet/HTMLCharsetDetector.java#L145
