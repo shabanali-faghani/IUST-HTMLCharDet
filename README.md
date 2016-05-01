@@ -63,7 +63,7 @@ If you use Maven as dependency manager, just place this dependency into your POM
 libraryDependencies += "ir.ac.iust" % "htmlchardet" % "1.0.0"
 ````
 ####Otherwise!
-If you don't use any dependency manager and have a pure java project you can download **htmlchardet-1.0.0.jar** either from inside the [wiki][wiki] folder or from [mvnrepository.org][mvnrepo]. In this case you need the first 4 dependency; those were mentioned in the [pom.xml][pom] file to get it to work for you.
+If you don't use any dependency manager and have a pure java project you can download **htmlchardet-1.0.0.jar** either from inside the [wiki][wiki] folder or from [mvnrepository.org][mvnrepo]. In this case you need also the first 4 dependency; those were mentioned in the [pom.xml][pom] file to get it to work for you.
 
 ##Usage
 
