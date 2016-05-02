@@ -1,6 +1,6 @@
 #IUST HTMLCharDet
 
-IUST HTMLCharDet is a meta java tool for detecting *Charset Encoding* of HTML web pages. **HTMLCharDet** stands for _**HTML** **Char**set **Det**ector_ and **IUST** stands for _**I**ran **U**niversity of **S**cience & **T**echnology_.
+IUST HTMLCharDet is a meta java tool for detecting *Charset Encoding* of HTML web pages. **HTMLCharDet** stands for **HTML** **Char**set **Det**ector and **IUST** stands for **I**ran **U**niversity of **S**cience & **T**echnology.
 
 This tool is in connection with a paper entitled:  
 <a href="http://link.springer.com/chapter/10.1007/978-3-319-28940-3_17"><p align=center style="font-size:160%;">
@@ -10,7 +10,7 @@ This tool is in connection with a paper entitled:
 
 which was presented In *[Proceedings of the 11th Asia Information Retrieval Societies Conference][1]* (pp. 215-226), Brisbane, Australia, 2015.
 
-Although we wrote a paper to describe the algorithm, but this tool is not just an academic effort to solve *charset encoding detection* problem for HTML web pages. In fact this tool is an **industrial** product which is now actively used in a large-scale web crawler, under a load of over than **1 billion** web pages. But despite its GREATNESS in practice, it's very small in size (just have two class!!). Both the small size and the effectiveness of this tool are originated from its algorithm. It is small, because its algorithm is so easy to implement, and it is effective, because in addition to the logic of its algorithm per se; as a part of its algorithm it uses two famous charset detector tools namely _**IBM ICU**_ and _**Mozilla CharDet**_ under the hood.
+Although we wrote a paper to describe the algorithm, but this tool is not just an academic effort to solve *charset encoding detection* problem for HTML web pages. In fact this tool is an **industrial** product which is now actively used in a large-scale web crawler, under a load of over than **1 billion** web pages. But despite its effectiveness in practice, it's very small in size (just have two class!!). Both the small size and the effectiveness of this tool are originated from its algorithm. It is small, because its algorithm is so easy to implement, and it is effective, because in addition to the logic of its algorithm per se; it uses two famous charset detector tools namely _**IBM ICU**_ and _**Mozilla CharDet**_ under the hood as a part of its algorithm.
 
 ##Precision (quick view)
 
@@ -45,7 +45,7 @@ To find more details about this test, you may have a look at: [*./test-data/lang
 <img src="https://cloud.githubusercontent.com/assets/14090324/12007852/db79aaf4-ac2c-11e5-883a-006de77d3222.jpg" alt="language-wise evaluation diagram image" height="319" width="645">
 </img>
 </p>
-As you can see from this diagram, the improveness of IUST HTMLCharDet's accuracy aginst two other tool in this test scenario is less that from which in the previous test scenario. It is due to the fact that over than 80 % of the websites use UTF-8 as their charset encoding [[ref][w3techs]]. Considering this fact and recalling from Encoding-Wise diagram, in which we saw both *IBM ICU* and *Mozilla CharDet* are fairly accurate in dealing with UTF-8, would have justify this diagram.
+As you can see from this diagram, the improveness of IUST HTMLCharDet's accuracy aginst two other tool in this test scenario is less that from which in the previous test scenario. It is due to the fact that over than 85 % of the websites use UTF-8 as their charset encoding [[ref][w3techs]]. Considering this fact and recalling Encoding-Wise diagram, in which we saw both *IBM ICU* and *Mozilla CharDet* are fairly accurate in dealing with UTF-8, would have justify this diagram.
 
 ##Installation
  
@@ -59,7 +59,7 @@ If you use Maven as dependency manager, just place this dependency into your POM
 </dependency>
 ````
 ####Scala SBT
-````java
+````scala
 libraryDependencies += "ir.ac.iust" % "htmlchardet" % "1.0.0"
 ````
 ####Otherwise!
