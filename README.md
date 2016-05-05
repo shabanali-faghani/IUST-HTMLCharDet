@@ -10,7 +10,7 @@ This tool is in connection with a paper entitled:
 
 which was presented In *[Proceedings of the 11th Asia Information Retrieval Societies Conference][1]* (pp. 215-226), Brisbane, Australia, 2015.
 
-Although we wrote a paper to describe the algorithm, but this tool is not just an academic effort to solve *charset encoding detection* problem for HTML web pages. In fact this tool is an **industrial** product which is now actively used in a large-scale web crawler, under a load of over than **1 billion** web pages. But despite its effectiveness in practice, it's very small in size (just have two class!!). Both the small size and the effectiveness of this tool are originated from its algorithm. It is small, because its algorithm is so easy to implement, and it is effective, because in addition to the logic of its algorithm per se; it uses two famous charset detector tools namely _**IBM ICU**_ and _**Mozilla CharDet**_ under the hood as a part of its algorithm.
+Although we wrote a paper to describe the algorithm, but this tool is not just an academic effort to solve *charset encoding detection* problem for HTML web pages. In fact this tool is an **industrial** product which is now actively used in a large-scale web crawler, under a load of over than **1 billion** web pages. But despite its accuracy in practice, it's very small in size (just has two class!!). Both the small size and the accuracy of this tool are originated from its algorithm. It is small, because its algorithm is so easy to implement, and it is accurate, because in addition to the logic of its algorithm per se; it uses two famous charset detector tools namely _**IBM ICU**_ and _**Mozilla CharDet**_ under the hood.
 
 ##Precision (quick view)
 
@@ -45,7 +45,7 @@ To find more details about this test, you may have a look at: [*./test-data/lang
 <img src="https://cloud.githubusercontent.com/assets/14090324/12007852/db79aaf4-ac2c-11e5-883a-006de77d3222.jpg" alt="language-wise evaluation diagram image" height="319" width="645">
 </img>
 </p>
-As you can see from this diagram, the improveness of IUST HTMLCharDet's accuracy aginst two other tool in this test scenario is less that from which in the previous test scenario. It is due to the fact that over than 85 % of the websites use UTF-8 as their charset encoding [[ref][w3techs]]. Considering this fact and recalling Encoding-Wise diagram, in which we saw both *IBM ICU* and *Mozilla CharDet* are fairly accurate in dealing with UTF-8, would have justify this diagram.
+As you can see from this diagram, in this test scenario the improveness in mean average accuracy of IUST HTMLCharDet aginst two other tools is less that from which in the previous test scenario (i.e. 0.14 and 0.10 in Lang-Wise versus 0.38 and 0.69 in Enc-Wise). It is due to the fact that over than 85 % of the websites use UTF-8 as their charset encoding [[ref][w3techs]]. With considering this fact and recalling [Encoding-Wise Evaluation diagram][ewe-diagram], in which we saw both *IBM ICU* and *Mozilla CharDet* are accurate in dealing with UTF-8, we would have been convinced with this results.
 
 ##Installation
  
@@ -85,6 +85,7 @@ Also, there is another detection method with `#detect(byte[] rawHtmlByteSequence
 [lang-wise-results]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/test-data/language-wise/results
 [w3techs]: http://w3techs.com/technologies/history_overview/character_encoding
 [pom]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/pom.xml
+[ewe-diagram]: https://cloud.githubusercontent.com/assets/14090324/12007849/cc8f46ca-ac2c-11e5-9600-dd3cd3a39ac1.jpg
 [mvnrepo]: http://mvnrepository.org/artifact/ir.ac.iust/htmlchardet/1.0.0
 [wiki]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/wiki
 [javadoc]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/src/main/java/ir/ac/iust/selab/htmlchardet/HTMLCharsetDetector.java#L145
