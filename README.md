@@ -88,4 +88,4 @@ Also, there is another detection method with `#detect(byte[] rawHtmlByteSequence
 [ewe-diagram]: https://cloud.githubusercontent.com/assets/14090324/12007849/cc8f46ca-ac2c-11e5-9600-dd3cd3a39ac1.jpg
 [mvnrepo]: http://mvnrepository.org/artifact/ir.ac.iust/htmlchardet/1.0.0
 [wiki]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/wiki
-[javadoc]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/src/main/java/ir/ac/iust/selab/htmlchardet/HTMLCharsetDetector.java#L145
+[javadoc]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/src/main/java/ir/ac/iust/htmlchardet/HTMLCharsetDetector.java#L146
