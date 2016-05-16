@@ -31,6 +31,7 @@ Usually, graphical presentation of the results makes a better sense ...
 <img src="https://cloud.githubusercontent.com/assets/14090324/12007849/cc8f46ca-ac2c-11e5-9600-dd3cd3a39ac1.jpg" alt="encoding-wise evaluation diagram image" height="300" width="645">
 </img>
 </p>
+I know that the results are odd and incredible indeed, specially for Windows-1251 and Windows-1256 (Cyrillic and Arabic specific charset encodings respectively), but it is just as well. To see the reason of this behavior of IUST HTMLCharDet from theoretical point of view please refer to the [paper][paper], but to see it in practice you can find prepared test codes in [*./test/java*][test-codes] and test data in [*./test-data*][test-data] folder.
 
 ####Language-Wise Evaluation
 In this test scenario, we compared our *hybrid mechanism* with the two others from language point of view. In this connection, we collected a list of URLs that are pointing to various web pages with different languages. The URLs are selected from the **top 1 million websites** visited from all over the world, as reported by [Alexa][Alexa]. In order to collect HTML documents in a specific language, we investigated web pages with the internet domain name of that language. For example, *Japanese* web pages are collected from *.jp* domain. The results of evaluation for eight different languages are shown in details in the following table ...
@@ -81,6 +82,8 @@ Also, there is another detection method with `#detect(byte[] rawHtmlByteSequence
 [paper]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/wiki/Charset-Encoding-Detection-of-HTML-Documents.pdf
 [corpus-code]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/src/test/java/encodingwise/corpus
 [corpus-data]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/test-data/encoding-wise/corpus.zip
+[test-codes]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/src/test/java
+[test-data]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/test-data
 [Alexa]: www.alexa.com
 [lang-wise-results]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/test-data/language-wise/results
 [w3techs]: http://w3techs.com/technologies/history_overview/character_encoding
