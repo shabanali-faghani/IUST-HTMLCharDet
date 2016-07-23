@@ -12,7 +12,7 @@ which was presented In *[Proceedings of the 11th Asia Information Retrieval Soci
 
 Although we wrote a paper to describe the algorithm, but this tool is not just an academic effort to solve *charset encoding detection* problem for HTML web pages. In fact this tool is an **industrial** product which is now actively used in a large-scale web crawler, under a load of over than **1 billion** web pages. But despite its accuracy in practice, it's very small in size (just has two class!!). Both the small size and the accuracy of this tool are originated from its algorithm. It is small, because its algorithm is so easy to implement, and it is accurate, because in addition to the logic of its algorithm per se; it uses two famous charset detector tools namely _**IBM ICU**_ and _**Mozilla CharDet**_ under the hood.
 
-##Important Note:
+##Important Warning:
 The release **1.0.0** is not valid because it has a **FATAL** logical bug. Before this release I refactored the code but have done a tiny mistake. The code at line 130 of the HTMLCharsetDetector class, i.e [*det.Reset();*][bug-line], should be deleted. If you use the source code of this tool just press *ctrl+d* (in Eclipse) on the mentioned line to fix it! Now, it detects all pages as UTF-8! I will fix it and will do another release as soon as possible :)
 
 ##Precision (quick view)
