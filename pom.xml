@@ -4,7 +4,7 @@
 
 	<groupId>ir.ac.iust</groupId>
 	<artifactId>htmlchardet</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>IUST HTMLCharDet</name>
@@ -39,7 +39,7 @@
 		<connection>scm:git:git@github.com:shabanali-faghani/IUST-HTMLCharDet.git</connection>
 		<developerConnection>scm:git:git@github.com:shabanali-faghani/IUST-HTMLCharDet.git</developerConnection>
 		<url>git@github.com:shabanali-faghani/IUST-HTMLCharDet.git</url>
-	  <tag>htmlchardet-1.0.1</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<properties>
