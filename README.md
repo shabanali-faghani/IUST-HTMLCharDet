@@ -12,9 +12,6 @@ which was presented In *[Proceedings of the 11th Asia Information Retrieval Soci
 
 Although we wrote a paper to describe the algorithm, but this tool is not just an academic effort to solve *charset encoding detection* problem for HTML web pages. In fact this tool is an **industrial** product which is now actively used in a large-scale web crawler, under a load of over than **1 billion** web pages. But despite its accuracy in practice, it's very small in size (just has two class!!). Both the small size and the accuracy of this tool are originated from its algorithm. It is small, because its algorithm is so easy to implement, and it is accurate, because in addition to the logic of its algorithm per se; it uses two famous charset detector tools namely _**IBM ICU**_ and _**Mozilla CharDet**_ under the hood.
 
-##Important Warning
-The release **1.0.0** is not valid because it has a **FATAL** logical bug. It detects all pages as UTF-8! Before this release I refactored the code but have done a tiny mistake. The code at line 130 of the HTMLCharsetDetector class, i.e [*det.Reset();*][bug-line], should be deleted. If you use the source code of this tool just press *ctrl+d* (in Eclipse) on the mentioned line to fix it! I will fix it and will do another release as soon as possible :)
-
 ##Precision (quick view)
 
 In order to determine the precision of IUST HTMLCharDet, we compared it with the two famous charset detector tools, i.e. _**IBM ICU**_ and _**Mozilla CharDet**_, against two test scenario including **Encoding-Wise** and **Language-Wise**. Results of the comparisons are presented in the [paper][paper], but bellow you can have a glance at results. To read more about comparisons, please find the paper inside *wiki* folder.
@@ -59,15 +56,18 @@ If you use Maven as dependency manager, just place this dependency into your POM
 <dependency>
     <groupId>ir.ac.iust</groupId>
     <artifactId>htmlchardet</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ````
 ####Scala SBT
 ````scala
-libraryDependencies += "ir.ac.iust" % "htmlchardet" % "1.0.0"
+libraryDependencies += "ir.ac.iust" % "htmlchardet" % "1.0.1"
 ````
 ####Otherwise!
-If you don't use any dependency manager and have a pure java project you can download **htmlchardet-1.0.0.jar** either from inside the [wiki][wiki] folder or from [mvnrepository.org][mvnrepo]. In this case you need also the first 4 dependency; those were mentioned in the [pom.xml][pom] file to get it to work for you.
+If you don't use any dependency manager and have a pure java project you can download **htmlchardet-1.0.1.jar** either from inside the [wiki][wiki] folder or from [mvnrepository.org][mvnrepo]. In this case you need also the first 4 dependency; those were mentioned in the [pom.xml][pom] file to get it to work for you.
+
+####Warning!!!
+Never use the version **1.0.0**, because it has a **FATAL** bug. See more details [here][bug-url].
 
 ##Usage
 
@@ -83,7 +83,6 @@ Also, there is another detection method with `#detect(byte[] rawHtmlByteSequence
 
 [1]: http://airs-conference.org/2015/program.html
 [paper]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/wiki/Charset-Encoding-Detection-of-HTML-Documents.pdf
-[bug-line]:https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/src/main/java/ir/ac/iust/htmlchardet/HTMLCharsetDetector.java#L130
 [corpus-code]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/src/test/java/encodingwise/corpus
 [corpus-data]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/test-data/encoding-wise/corpus.zip
 [test-codes]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/src/test/java
@@ -93,6 +92,7 @@ Also, there is another detection method with `#detect(byte[] rawHtmlByteSequence
 [w3techs]: http://w3techs.com/technologies/history_overview/character_encoding
 [pom]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/pom.xml
 [ewe-diagram]: https://cloud.githubusercontent.com/assets/14090324/12007849/cc8f46ca-ac2c-11e5-9600-dd3cd3a39ac1.jpg
-[mvnrepo]: http://mvnrepository.org/artifact/ir.ac.iust/htmlchardet/1.0.0
+[mvnrepo]: http://mvnrepository.org/artifact/ir.ac.iust/htmlchardet
 [wiki]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/tree/master/wiki
+[bug-url]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/issues/2
 [javadoc]: https://github.com/shabanali-faghani/IUST-HTMLCharDet/blob/master/src/main/java/ir/ac/iust/htmlchardet/HTMLCharsetDetector.java#L146
