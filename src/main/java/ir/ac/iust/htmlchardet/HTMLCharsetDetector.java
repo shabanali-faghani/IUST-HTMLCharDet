@@ -127,7 +127,6 @@ public class HTMLCharsetDetector {
 		nsDetector det = new nsDetector(nsDetector.ALL);
 		det.DoIt(bytes, bytes.length, false);
 		det.DataEnd();
-		det.Reset();
 		return det.getProbableCharsets()[0];
 	}
 
