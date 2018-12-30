@@ -1,7 +1,7 @@
 /target/
-/.settings/
-/.classpath
-/.project
 /.gitignore
-/bin/
-/build/
+/.idea/
+/eval/eval.iml
+/eval/target/
+/eval/test-data/encoding-wise/corpus/
+!/eval/test-data/encoding-wise/corpus/corpus.zip
